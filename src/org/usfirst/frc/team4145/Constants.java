@@ -13,7 +13,7 @@ public class Constants {
 
     public static boolean ENABLE_MP_TEST_MODE = false; //enables Teleop Motion profiling test mode code in teleop drive
 
-    public static double DRIVETRAIN_UPDATE_RATE = 0.005;
+    public static double DRIVETRAIN_UPDATE_RATE = 0.01;
     public static double LOGGING_UPDATE_RATE = 0.020;
 
     public static String DRIVE_PATH_1 = "/media/sda1";

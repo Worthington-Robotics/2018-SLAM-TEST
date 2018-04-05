@@ -113,7 +113,7 @@ public class Robot extends TimedRobot
     @Override
     public void teleopPeriodic() 
     {
-        RobotMap.driveFrontLeft.set(ControlMode.Velocity, 30 * 4096 / 100);
+
         Scheduler.getInstance().run();
     }
 

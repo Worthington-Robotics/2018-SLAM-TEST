@@ -3,6 +3,7 @@ package org.usfirst.frc.team4145.subsystems.RobotDriveV3;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Notifier;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -22,9 +23,9 @@ public class RobotDriveV3 extends Subsystem {
     private double[] lastAutoOutput = {0,0,0}; //left, right, turn (not used by profiling)
 
     public RobotDriveV3() {
-
-        //m_MixedDriveInstance = new MixedDrive(RobotMap.driveFrontLeft, RobotMap.driveRearLeft, RobotMap.driveFrontRight, RobotMap.driveRearRight);
-
+        m_MixedDriveInstance = new MixedDrive(RobotMap.driveFrontLeft, RobotMap.driveRearLeft, RobotMap.driveFrontRight, RobotMap.driveRearRight);
+        m_NotifierInstance = new Notifier(periodic);
+        startPeriodic();
     }
 
     public void startPeriodic(){
@@ -32,8 +33,9 @@ public class RobotDriveV3 extends Subsystem {
     }
 
     private Runnable periodic = () -> {
-
-
+        if(DriverStation.getInstance().isEnabled() && DriverStation.getInstance().isOperatorControl()) {
+            driveTank(30 * 4096 / 100, 0);
+        }
         smartDashboardUpdates();
     };
 
@@ -137,7 +139,7 @@ public class RobotDriveV3 extends Subsystem {
      * @param rightSpeed speed of right side of drivetrain
      */
     private void driveTank(double leftSpeed, double rightSpeed) {
-        m_MixedDriveInstance.tankDrive(leftSpeed, rightSpeed, false);
+        m_MixedDriveInstance.tankDrive(leftSpeed, rightSpeed);
     }
 
     protected void initDefaultCommand() {
