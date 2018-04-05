@@ -34,7 +34,7 @@ public class RobotDriveV3 extends Subsystem {
 
     private Runnable periodic = () -> {
         if(DriverStation.getInstance().isEnabled() && DriverStation.getInstance().isOperatorControl()) {
-            driveTank(30 * 4096 / 100, 0);
+            driveTank(150 * (512/75), 0 * (512/75));
         }
         smartDashboardUpdates();
     };
