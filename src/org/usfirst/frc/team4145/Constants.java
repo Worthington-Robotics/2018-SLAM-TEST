@@ -15,11 +15,18 @@ public class Constants {
 
     public static double DRIVETRAIN_UPDATE_RATE = 0.01;
     public static double LOGGING_UPDATE_RATE = 0.020;
+    public static int OBSERVATION_BUFFER_SIZE = 10;
+    public static int COUNTS_PER_INCH = 4096;
+
+    public static double kTrackLengthInches = 8.265;
+    public static double kTrackWidthInches = 23.8;
+    public static double kTrackEffectiveDiameter = (kTrackWidthInches * kTrackWidthInches + kTrackLengthInches * kTrackLengthInches)
+            / kTrackWidthInches;
+    public static double kTrackScrubFactor = 0.5;
 
     public static String DRIVE_PATH_1 = "/media/sda1";
     public static String DRIVE_PATH_2 = "/media/sda2";
     public static String MOTION_PROFILE_PATH = "/home/lvuser/MotionProfile/";
-
 
     /*
      * ----------------------------
