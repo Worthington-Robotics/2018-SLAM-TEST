@@ -19,16 +19,13 @@ public class RobotDriveV3 extends Subsystem {
     private MixedDrive m_MixedDriveInstance;
     private Notifier m_NotifierInstance;
     private PoseEstimator robotPose;
-
-    private double[] lastTeleopOutput = {0,0}; //y, x
-    private double[] lastAutoOutput = {0,0,0}; //left, right, turn (not used by profiling)
+    private boolean isProfiling;
 
     public RobotDriveV3() {
         m_MixedDriveInstance = new MixedDrive(RobotMap.driveFrontLeft, RobotMap.driveRearLeft, RobotMap.driveFrontRight, RobotMap.driveRearRight);
         m_NotifierInstance = new Notifier(periodic);
         startPeriodic();
         robotPose = new PoseEstimator();
-
     }
 
     public void startPeriodic(){
@@ -38,6 +35,14 @@ public class RobotDriveV3 extends Subsystem {
     private Runnable periodic = () -> {
         if(DriverStation.getInstance().isEnabled() && DriverStation.getInstance().isOperatorControl()) {
             driveTank(150 * (512/75), 0 * (512/75));
+        }
+        if(DriverStation.getInstance().isEnabled() && DriverStation.getInstance().isAutonomous()){
+            if(isProfiling){
+
+            }
+            else{
+                
+            }
         }
         smartDashboardUpdates();
     };

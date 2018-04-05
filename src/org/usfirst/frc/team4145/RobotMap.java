@@ -40,9 +40,13 @@ public class RobotMap {
 
         // all Motor controller objects
         driveFrontLeft = new WPI_TalonSRX(1);
+        driveFrontLeft.setSelectedSensorPosition(0,0,0);
         driveRearLeft = new WPI_TalonSRX(2);
+        driveRearLeft.setSelectedSensorPosition(0,0,0);
         driveFrontRight = new WPI_TalonSRX(3);
+        driveFrontRight.setSelectedSensorPosition(0,0,0);
         driveRearRight = new WPI_TalonSRX(4);
+        driveRearRight.setSelectedSensorPosition(0,0,0);
 
 
         // all sensor objects here
