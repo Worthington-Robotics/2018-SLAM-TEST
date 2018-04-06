@@ -21,7 +21,7 @@ public class OI
         joystick = new Joystick(0);
     }
 
-    public Joystick getJoystick() {
+    public Joystick getMasterStick() {
         return joystick;
     }
 }

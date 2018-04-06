@@ -40,20 +40,16 @@ public class RobotMap {
 
         // all Motor controller objects
         driveFrontLeft = new WPI_TalonSRX(1);
-        driveFrontLeft.setSelectedSensorPosition(0,0,0);
         driveRearLeft = new WPI_TalonSRX(2);
-        driveRearLeft.setSelectedSensorPosition(0,0,0);
         driveFrontRight = new WPI_TalonSRX(3);
-        driveFrontRight.setSelectedSensorPosition(0,0,0);
         driveRearRight = new WPI_TalonSRX(4);
-        driveRearRight.setSelectedSensorPosition(0,0,0);
-
 
         // all sensor objects here
         ahrs = new AHRS(SPI.Port.kMXP); // finish declaring AHRS to MXP SPI bus
         ahrs.reset();
 
         robotDriveV3 = new RobotDriveV3();
+        robotDriveV3.reset();
 
         addLoggingKeys();
     }
@@ -70,17 +66,5 @@ public class RobotMap {
         RobotMap.loggingSystem.addWatchKey("Left Motor Voltage");
         RobotMap.loggingSystem.addWatchKey("Right Motor Voltage");
         RobotMap.loggingSystem.addWatchKey("Left Talon Voltage");
-        RobotMap.loggingSystem.addWatchKey("setpoint1");
-        RobotMap.loggingSystem.addWatchKey("feed forward1");
-        RobotMap.loggingSystem.addWatchKey("feed back1");
-        RobotMap.loggingSystem.addWatchKey("velocity1");
-        RobotMap.loggingSystem.addWatchKey("setpoint2");
-        RobotMap.loggingSystem.addWatchKey("feed forward2");
-        RobotMap.loggingSystem.addWatchKey("feed back2");
-        RobotMap.loggingSystem.addWatchKey("velocity2");
-        RobotMap.loggingSystem.addWatchKey("error deriv1");
-        RobotMap.loggingSystem.addWatchKey("error deriv2");
-        RobotMap.loggingSystem.addWatchKey("velocity setpoint1");
-        RobotMap.loggingSystem.addWatchKey("velocity setpoint1");
     }
 }

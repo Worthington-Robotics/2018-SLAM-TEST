@@ -26,7 +26,7 @@ public class Constants {
 
     public static String DRIVE_PATH_1 = "/media/sda1";
     public static String DRIVE_PATH_2 = "/media/sda2";
-    public static String MOTION_PROFILE_PATH = "/home/lvuser/MotionProfile/";
+
 
     /*
      * ----------------------------

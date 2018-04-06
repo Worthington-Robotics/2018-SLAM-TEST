@@ -76,20 +76,8 @@ public class Robot extends TimedRobot
     @Override
     public void autonomousInit() 
     {
-        autonomousCommand = chooser.getSelected();
+        RobotMap.robotDriveV3.configAuto();
 
-        /*
-         * String autoSelected = SmartDashboard.getString("Auto Selector",
-         * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
-         * = new MyAutoCommand(); break; case "Default Auto": default:
-         * autonomousCommand = new ExampleCommand(); break; }
-         */
-
-        // schedule the autonomous command (example)
-        if (autonomousCommand != null) 
-        {
-            autonomousCommand.start();
-        }
     }
 
     /**
@@ -104,7 +92,7 @@ public class Robot extends TimedRobot
     @Override
     public void teleopInit() 
     {
-        RobotMap.robotDriveV3.configAuto();
+        RobotMap.robotDriveV3.configTeleop();
     }
 
     /**
