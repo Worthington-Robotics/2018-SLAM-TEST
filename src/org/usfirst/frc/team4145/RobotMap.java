@@ -12,7 +12,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.*;
 import org.usfirst.frc.team4145.shared.LoggingSystem;
-import org.usfirst.frc.team4145.subsystems.RobotDriveV3.RobotDriveV3;
+import org.usfirst.frc.team4145.subsystems.RobotDriveV4.RobotDriveV4;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -31,7 +31,7 @@ public class RobotMap {
     // sensors
     public static AHRS ahrs; // AHRS system on navx
 
-    public static RobotDriveV3 robotDriveV3;
+    public static RobotDriveV4 robotDriveV4;
 
 
     public static void init() {
@@ -48,8 +48,8 @@ public class RobotMap {
         ahrs = new AHRS(SPI.Port.kMXP); // finish declaring AHRS to MXP SPI bus
         ahrs.reset();
 
-        robotDriveV3 = new RobotDriveV3();
-        robotDriveV3.reset();
+        robotDriveV4 = new RobotDriveV4();
+        robotDriveV4.reset();
 
         addLoggingKeys();
     }

@@ -1,4 +1,4 @@
-package org.usfirst.frc.team4145.subsystems.RobotDriveV3;
+package org.usfirst.frc.team4145.subsystems.RobotDriveV4;
 
 import edu.wpi.first.wpilibj.Notifier;
 import edu.wpi.first.wpilibj.Timer;
@@ -36,9 +36,9 @@ public class PoseEstimator {
 
     private Runnable loop = () -> {
         double currentTime = Timer.getFPGATimestamp();
-        double currentLeftEncoder = RobotMap.robotDriveV3.getLeftEncoder();
-        double currentRightEncoder = RobotMap.robotDriveV3.getRightEncoder();
-        Rotation2d gyro = Rotation2d.fromDegrees(RobotMap.robotDriveV3.getGyro());
+        double currentLeftEncoder = RobotMap.robotDriveV4.getLeftEncoder();
+        double currentRightEncoder = RobotMap.robotDriveV4.getRightEncoder();
+        Rotation2d gyro = Rotation2d.fromDegrees(RobotMap.robotDriveV4.getGyro());
         RigidTransform2d odometry = generateOdometryFromSensors((currentLeftEncoder - leftPrevEncCount), (currentRightEncoder - rightPrevEncCount), gyro);
         addObservations(currentTime, odometry);
         outputToSmartDashboard();

@@ -7,7 +7,6 @@
 
 package org.usfirst.frc.team4145;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -76,7 +75,7 @@ public class Robot extends TimedRobot
     @Override
     public void autonomousInit() 
     {
-        RobotMap.robotDriveV3.configAuto();
+        RobotMap.robotDriveV4.configAuto();
 
     }
 
@@ -92,7 +91,7 @@ public class Robot extends TimedRobot
     @Override
     public void teleopInit() 
     {
-        RobotMap.robotDriveV3.configTeleop();
+        RobotMap.robotDriveV4.configTeleop();
     }
 
     /**

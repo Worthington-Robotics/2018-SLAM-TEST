@@ -1,4 +1,4 @@
-package org.usfirst.frc.team4145.subsystems.RobotDriveV3;
+package org.usfirst.frc.team4145.subsystems.RobotDriveV4;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
@@ -12,7 +12,7 @@ import org.usfirst.frc.team4145.RobotMap;
 import org.usfirst.frc.team4145.shared.MixedDrive;
 
 
-public class RobotDriveV3 extends Subsystem implements PIDOutput, PIDSource {
+public class RobotDriveV4 extends Subsystem implements PIDOutput, PIDSource {
 
     //used internally for data
     private MixedDrive m_MixedDriveInstance;
@@ -28,7 +28,7 @@ public class RobotDriveV3 extends Subsystem implements PIDOutput, PIDSource {
     private double index = 0;
     private PIDSourceType type = PIDSourceType.kDisplacement;
 
-    public RobotDriveV3() {
+    public RobotDriveV4() {
         m_MixedDriveInstance = new MixedDrive(RobotMap.driveFrontLeft, RobotMap.driveRearLeft, RobotMap.driveFrontRight, RobotMap.driveRearRight);
         m_NotifierInstance = new Notifier(periodic);
         startPeriodic();
@@ -62,7 +62,7 @@ public class RobotDriveV3 extends Subsystem implements PIDOutput, PIDSource {
                 driveTank(150 * (512/75), 0 * (512/75));
             }
             else{
-                driveTank(150 * (512/75), 0 * (512/75));
+                driveCartesian(operatorInput[1], -operatorInput[0], operatorInput[2]);
             }
         }
         smartDashboardUpdates();
@@ -78,6 +78,10 @@ public class RobotDriveV3 extends Subsystem implements PIDOutput, PIDSource {
 
     public double getRightEncoder(){
         return RobotMap.driveFrontRight.getSensorCollection().getQuadraturePosition() / 4096;
+    }
+
+    public void setOperatorInput(double[] input){
+        operatorInput = input;
     }
 
     public void enableTo(double rot, boolean en) {
