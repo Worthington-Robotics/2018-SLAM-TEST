@@ -16,7 +16,6 @@ public class Constants {
     public static double DRIVETRAIN_UPDATE_RATE = 0.01;
     public static double LOGGING_UPDATE_RATE = 0.020;
     public static int OBSERVATION_BUFFER_SIZE = 10;
-    public static int COUNTS_PER_INCH = 4096;
 
     public static double kTrackLengthInches = 8.265;
     public static double kTrackWidthInches = 23.8;
