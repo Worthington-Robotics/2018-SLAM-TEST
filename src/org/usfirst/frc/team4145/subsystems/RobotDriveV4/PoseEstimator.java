@@ -36,8 +36,8 @@ public class PoseEstimator {
 
     private Runnable loop = () -> {
         double currentTime = Timer.getFPGATimestamp();
-        double currentLeftEncoder = RobotMap.robotDriveV4.getLeftEncoder();
-        double currentRightEncoder = RobotMap.robotDriveV4.getRightEncoder();
+        double currentLeftEncoder = RobotMap.robotDriveV4.getLeftEncoder() * ((Constants.WHEEL_DIAMETER * 3.14159) / Constants.COUNTS_PER_REV);
+        double currentRightEncoder = RobotMap.robotDriveV4.getRightEncoder() * ((Constants.WHEEL_DIAMETER * 3.14159) / Constants.COUNTS_PER_REV);
         Rotation2d gyro = Rotation2d.fromDegrees(RobotMap.robotDriveV4.getGyro());
         RigidTransform2d odometry = generateOdometryFromSensors((currentLeftEncoder - leftPrevEncCount), (currentRightEncoder - rightPrevEncCount), gyro);
         addObservations(currentTime, odometry);
@@ -46,11 +46,9 @@ public class PoseEstimator {
         rightPrevEncCount = currentRightEncoder;
     };
 
-    public RigidTransform2d generateOdometryFromSensors(double left_encoder_delta_distance,
-                                                        double right_encoder_delta_distance, Rotation2d current_gyro_angle) {
+    public RigidTransform2d generateOdometryFromSensors(double left_encoder_delta_distance, double right_encoder_delta_distance, Rotation2d current_gyro_angle) {
         RigidTransform2d last_measurement = getLatestFieldToVehicle().getValue();
-        return Kinematics.integrateForwardKinematics(last_measurement, left_encoder_delta_distance,
-                right_encoder_delta_distance, current_gyro_angle);
+        return Kinematics.integrateForwardKinematics(last_measurement, left_encoder_delta_distance, right_encoder_delta_distance, current_gyro_angle);
     }
 
     public synchronized void addObservations(double timestamp, RigidTransform2d observation) {
@@ -59,9 +57,9 @@ public class PoseEstimator {
 
     public void outputToSmartDashboard() {
         RigidTransform2d odometry = getLatestFieldToVehicle().getValue();
-        SmartDashboard.putNumber("robot_pose_x", odometry.getTranslation().getX());
-        SmartDashboard.putNumber("robot_pose_y", odometry.getTranslation().getY());
-        SmartDashboard.putNumber("robot_pose_theta", odometry.getRotation().getDegrees());
+        SmartDashboard.putNumber("Robot Pose X", odometry.getTranslation().getX());
+        SmartDashboard.putNumber("Robot Pose Y", odometry.getTranslation().getY());
+        SmartDashboard.putNumber("Robot Pose Theta", odometry.getRotation().getDegrees());
     }
 
 }

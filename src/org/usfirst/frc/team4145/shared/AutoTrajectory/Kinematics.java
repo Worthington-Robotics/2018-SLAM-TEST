@@ -19,7 +19,7 @@ public class Kinematics {
     public static RigidTransform2d.Delta forwardKinematics(double left_wheel_delta, double right_wheel_delta) {
         double linear_velocity = (left_wheel_delta + right_wheel_delta) / 2;
         double delta_v = (right_wheel_delta - left_wheel_delta) / 2;
-        double delta_rotation = delta_v * 2 * Constants.kTrackScrubFactor / Constants.kTrackEffectiveDiameter;
+        double delta_rotation = delta_v * 2 * Constants.TRACK_SCRUB_FACTOR / Constants.TRACK_EFFECTIVE_DIAMETER;
         return new RigidTransform2d.Delta(linear_velocity, 0, delta_rotation);
     }
 
@@ -33,10 +33,8 @@ public class Kinematics {
     }
 
     /** Append the result of forward kinematics to a previous pose. */
-    public static RigidTransform2d integrateForwardKinematics(RigidTransform2d current_pose, double left_wheel_delta,
-            double right_wheel_delta, Rotation2d current_heading) {
-        RigidTransform2d.Delta with_gyro = forwardKinematics(left_wheel_delta, right_wheel_delta,
-                current_pose.getRotation().inverse().rotateBy(current_heading).getRadians());
+    public static RigidTransform2d integrateForwardKinematics(RigidTransform2d current_pose, double left_wheel_delta, double right_wheel_delta, Rotation2d current_heading) {
+        RigidTransform2d.Delta with_gyro = forwardKinematics(left_wheel_delta, right_wheel_delta, current_pose.getRotation().inverse().rotateBy(current_heading).getRadians());
         return current_pose.transformBy(RigidTransform2d.fromVelocity(with_gyro));
     }
 
@@ -54,7 +52,7 @@ public class Kinematics {
         if (Math.abs(velocity.dtheta) < kEpsilon) {
             return new DriveVelocity(velocity.dx, velocity.dx);
         }
-        double delta_v = Constants.kTrackEffectiveDiameter * velocity.dtheta / (2 * Constants.kTrackScrubFactor);
+        double delta_v = Constants.TRACK_EFFECTIVE_DIAMETER * velocity.dtheta / (2 * Constants.TRACK_SCRUB_FACTOR);
         return new DriveVelocity(velocity.dx - delta_v, velocity.dx + delta_v);
     }
 }

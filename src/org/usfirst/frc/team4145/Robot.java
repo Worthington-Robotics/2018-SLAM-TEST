@@ -13,6 +13,8 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team4145.commands.ExampleCommand;
+import org.usfirst.frc.team4145.shared.AutoStateMachine.AutoStateMachine;
+import org.usfirst.frc.team4145.shared.LoggingSystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -39,6 +41,7 @@ public class Robot extends TimedRobot
     {
         RobotMap.init();
         oi = new OI();
+        LoggingSystem.WriteBuildInfoToDashboard();
         chooser.addDefault("Default Auto", new ExampleCommand());
         // chooser.addObject("My Auto", new MyAutoCommand());
         SmartDashboard.putData("Auto mode", chooser);
@@ -76,6 +79,7 @@ public class Robot extends TimedRobot
     public void autonomousInit() 
     {
         RobotMap.robotDriveV4.configAuto();
+        AutoStateMachine.runMachine(new testAuto(1).getQueuedStates());
 
     }
 

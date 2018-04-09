@@ -9,15 +9,34 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team4145.Constants;
 import org.usfirst.frc.team4145.Robot;
 import org.usfirst.frc.team4145.RobotMap;
+import org.usfirst.frc.team4145.shared.AutoTrajectory.AdaptivePurePursuitController;
+import org.usfirst.frc.team4145.shared.AutoTrajectory.Kinematics;
+import org.usfirst.frc.team4145.shared.AutoTrajectory.Path;
+import org.usfirst.frc.team4145.shared.AutoTrajectory.RigidTransform2d;
 import org.usfirst.frc.team4145.shared.MixedDrive;
+
+import static org.usfirst.frc.team4145.subsystems.RobotDriveV4.RobotDriveV4.DriveControlState.OPEN_LOOP;
 
 
 public class RobotDriveV4 extends Subsystem implements PIDOutput, PIDSource {
 
+    public enum DriveControlState {
+        OPEN_LOOP("Open Loop"), PATH_FOLLOWING_CONTROL("Path following");
+        private String s;
+
+        DriveControlState(String name){
+            s = name;
+        }
+
+        @Override
+        public String toString() {
+            return s;
+        }
+    }
+
     //used internally for data
     private MixedDrive m_MixedDriveInstance;
     private Notifier m_NotifierInstance;
-    private PoseEstimator robotPose;
     private boolean isProfiling = false;
     private PIDController gyroLock;
     private double pidOutput = 0; //DO NOT MODIFY
@@ -27,12 +46,14 @@ public class RobotDriveV4 extends Subsystem implements PIDOutput, PIDSource {
     private double[] operatorInput = {0, 0, 0}; //last input set from joystick update
     private double index = 0;
     private PIDSourceType type = PIDSourceType.kDisplacement;
+    private DriveControlState driveControlState = OPEN_LOOP;
+    private AdaptivePurePursuitController pathFollowingController;
 
     public RobotDriveV4() {
         m_MixedDriveInstance = new MixedDrive(RobotMap.driveFrontLeft, RobotMap.driveRearLeft, RobotMap.driveFrontRight, RobotMap.driveRearRight);
         m_NotifierInstance = new Notifier(periodic);
+        reset();
         startPeriodic();
-        robotPose = new PoseEstimator();
         initGyro();
     }
 
@@ -58,8 +79,11 @@ public class RobotDriveV4 extends Subsystem implements PIDOutput, PIDSource {
             driveCartesian(operatorInput[1], -operatorInput[0], operatorInput[2]);
         }
         if(DriverStation.getInstance().isAutonomous() && DriverStation.getInstance().isEnabled()){
-            if(isProfiling){
-                driveTank(150 * (512/75), 0 * (512/75));
+            if(driveControlState == DriveControlState.PATH_FOLLOWING_CONTROL){
+                updatePathFollower();
+                if (isFinishedPath()) {
+                    stop();
+                }
             }
             else{
                 driveCartesian(operatorInput[1], -operatorInput[0], operatorInput[2]);
@@ -73,11 +97,11 @@ public class RobotDriveV4 extends Subsystem implements PIDOutput, PIDSource {
     }
 
     public double getLeftEncoder(){
-        return RobotMap.driveFrontLeft.getSensorCollection().getQuadraturePosition() / 4096;
+        return -RobotMap.driveFrontLeft.getSensorCollection().getQuadraturePosition();
     }
 
     public double getRightEncoder(){
-        return RobotMap.driveFrontRight.getSensorCollection().getQuadraturePosition() / 4096;
+        return RobotMap.driveFrontRight.getSensorCollection().getQuadraturePosition();
     }
 
     public void setOperatorInput(double[] input){
@@ -87,6 +111,41 @@ public class RobotDriveV4 extends Subsystem implements PIDOutput, PIDSource {
     public void enableTo(double rot, boolean en) {
         this.setTarget(rot);
         this.enableLock(en);
+    }
+
+    public synchronized void followPath(Path path, boolean reversed) {
+        if (driveControlState != DriveControlState.PATH_FOLLOWING_CONTROL) {
+            configAuto();
+        }
+        pathFollowingController = new AdaptivePurePursuitController(Constants.PATH_FOLLOWING_LOOKAHEAD,
+                Constants.PATH_FOLLOWING_MAX_ACCELERATION, Constants.DRIVETRAIN_UPDATE_RATE, path, reversed, 0.25);
+        driveControlState = DriveControlState.PATH_FOLLOWING_CONTROL;
+        updatePathFollower();
+    }
+
+    public void stop(){
+        driveControlState = DriveControlState.OPEN_LOOP;
+    }
+
+    public synchronized boolean isFinishedPath() {
+        return (driveControlState == DriveControlState.PATH_FOLLOWING_CONTROL && pathFollowingController.isDone())
+                || driveControlState != DriveControlState.PATH_FOLLOWING_CONTROL;
+    }
+
+    private void updatePathFollower() {
+        RigidTransform2d robot_pose = RobotMap.robotPose.getLatestFieldToVehicle().getValue();
+        RigidTransform2d.Delta command = pathFollowingController.update(robot_pose, Timer.getFPGATimestamp());
+        Kinematics.DriveVelocity setpoint = Kinematics.inverseKinematics(command);
+
+        // Scale the command to respect the max velocity limits
+        double max_vel = 0.0;
+        max_vel = Math.max(max_vel, Math.abs(setpoint.left));
+        max_vel = Math.max(max_vel, Math.abs(setpoint.right));
+        if (max_vel > Constants.PATH_FOLLOWING_MAX_VELOCITY) {
+            double scaling = Constants.PATH_FOLLOWING_MAX_VELOCITY / max_vel;
+            setpoint = new Kinematics.DriveVelocity(setpoint.left * scaling, setpoint.right * scaling);
+        }
+        driveTank(inchesPerSecondToRpm(setpoint.left), inchesPerSecondToRpm(setpoint.right));
     }
 
     public double pidGet(){
@@ -160,6 +219,17 @@ public class RobotDriveV4 extends Subsystem implements PIDOutput, PIDSource {
         SmartDashboard.putNumber("Right Talon Voltage", RobotMap.driveRearRight.getBusVoltage());
         SmartDashboard.putNumber("Right Wheel Encoder", getRightEncoder());
         SmartDashboard.putNumber("Left Wheel Encoder", getLeftEncoder());
+        SmartDashboard.putNumber("Right Wheel Distance", getRightEncoder() * ((Constants.WHEEL_DIAMETER * Math.PI) / Constants.COUNTS_PER_REV));
+        SmartDashboard.putNumber("Left Wheel Distance", getLeftEncoder() * ((Constants.WHEEL_DIAMETER * Math.PI) / Constants.COUNTS_PER_REV));
+        SmartDashboard.putString("Drive Control Mode", driveControlState.toString());
+    }
+
+    private static double inchesToRotations(double inches) {
+        return inches / (Constants.WHEEL_DIAMETER * Math.PI);
+    }
+
+    private static double inchesPerSecondToRpm(double inches_per_second) {
+        return inchesToRotations(inches_per_second) * 60;
     }
 
     private void initGyro(){
@@ -183,7 +253,7 @@ public class RobotDriveV4 extends Subsystem implements PIDOutput, PIDSource {
     }
 
     private void driveTank(double leftSpeed, double rightSpeed) {
-        m_MixedDriveInstance.tankDrive(leftSpeed, rightSpeed);
+        m_MixedDriveInstance.tankDrive((leftSpeed * 512)/75 , (rightSpeed * 512)/75);
     }
 
     private void setTarget(double target) {

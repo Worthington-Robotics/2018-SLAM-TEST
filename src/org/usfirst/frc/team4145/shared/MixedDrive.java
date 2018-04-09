@@ -23,8 +23,8 @@ public class MixedDrive extends MecanumDrive{
     }
 
     public void tankDrive(double leftSpeed, double rightSpeed) {
-        kFrontLeft.set(ControlMode.Velocity, leftSpeed * m_maxOutput);
-        kFrontRight.set(ControlMode.Velocity, -rightSpeed * m_maxOutput);
+        kFrontLeft.set(ControlMode.Velocity, leftSpeed);
+        kFrontRight.set(ControlMode.Velocity, -rightSpeed);
         m_safetyHelper.feed();
     }
 

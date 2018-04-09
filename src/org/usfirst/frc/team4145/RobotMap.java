@@ -12,6 +12,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.*;
 import org.usfirst.frc.team4145.shared.LoggingSystem;
+import org.usfirst.frc.team4145.subsystems.RobotDriveV4.PoseEstimator;
 import org.usfirst.frc.team4145.subsystems.RobotDriveV4.RobotDriveV4;
 
 /**
@@ -32,6 +33,7 @@ public class RobotMap {
     public static AHRS ahrs; // AHRS system on navx
 
     public static RobotDriveV4 robotDriveV4;
+    public static PoseEstimator robotPose;
 
 
     public static void init() {
@@ -50,7 +52,7 @@ public class RobotMap {
 
         robotDriveV4 = new RobotDriveV4();
         robotDriveV4.reset();
-
+        robotPose = new PoseEstimator();
         addLoggingKeys();
     }
 
