@@ -42,7 +42,6 @@ public class RobotMap {
 
         // all Motor controller objects
         driveFrontLeft = new WPI_TalonSRX(1);
-        System.out.println(driveFrontLeft.getDeviceID());
         driveRearLeft = new WPI_TalonSRX(2);
         driveFrontRight = new WPI_TalonSRX(3);
         driveRearRight = new WPI_TalonSRX(4);

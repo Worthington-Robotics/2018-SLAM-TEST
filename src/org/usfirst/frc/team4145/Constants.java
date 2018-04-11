@@ -13,12 +13,13 @@ public class Constants {
 
     public static boolean ENABLE_MP_TEST_MODE = true; //enables motion profiling test across all modes
 
+    public static int PID_IDX = 0;
+
     public static double DRIVETRAIN_UPDATE_RATE = 0.01;
     public static double LOGGING_UPDATE_RATE = 0.020;
     public static int OBSERVATION_BUFFER_SIZE = 10;
-    public static double TRACK_LENGTH_INCHES = 8.265;
     public static double TRACK_WIDTH_INCHES = 23.8;
-    public static double TRACK_EFFECTIVE_DIAMETER = (TRACK_WIDTH_INCHES * TRACK_WIDTH_INCHES + TRACK_LENGTH_INCHES * TRACK_LENGTH_INCHES) / TRACK_WIDTH_INCHES;
+    public static double TRACK_EFFECTIVE_DIAMETER = TRACK_WIDTH_INCHES;
     public static double TRACK_SCRUB_FACTOR = 0.5;
     public static double WHEEL_DIAMETER = 6.0;
     public static double COUNTS_PER_REV = 4096;
@@ -145,15 +146,15 @@ public class Constants {
      * || Spilt Constants ||
      * ---------------------
      */
-    public static double MP_TESTSPEED = 220; //8 inches per second
+    public static double MP_TESTSPEED = 1600; //8 inches per second
 
-    private static double PRACTICE_RIGHT_KF = 0.2000;
-    private static double PRACTICE_RIGHT_KP = 0.0000;
+    private static double PRACTICE_RIGHT_KF = 0.0450; //nominal: 0.0450
+    private static double PRACTICE_RIGHT_KP = 0.0500;
     private static double PRACTICE_RIGHT_KI = 0.0000;
     private static double PRACTICE_RIGHT_KD = 0.0000;
 
-    private static double PRACTICE_LEFT_KF = 0.2000;
-    private static double PRACTICE_LEFT_KP = 0.0000;
+    private static double PRACTICE_LEFT_KF = 0.0450; //nominal: 0.0450
+    private static double PRACTICE_LEFT_KP = 0.0500;
     private static double PRACTICE_LEFT_KI = 0.0000;
     private static double PRACTICE_LEFT_KD = 0.0000;
 

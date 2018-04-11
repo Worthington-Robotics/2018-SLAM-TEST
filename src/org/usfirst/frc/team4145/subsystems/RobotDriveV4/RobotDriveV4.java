@@ -39,12 +39,9 @@ public class RobotDriveV4 extends Subsystem implements PIDOutput, PIDSource {
     private MixedDrive m_MixedDriveInstance;
     private Notifier m_NotifierInstance;
     private PIDController gyroLock;
-    private double pidOutput = 0; //DO NOT MODIFY
-    private boolean enLock = false;
-    private boolean isReversed = false;
-    private boolean isLowGear = false;
+    private double pidOutput = 0, index = 0; //DO NOT MODIFY
+    private boolean enLock = false, isReversed = false, isLowGear = false;
     private double[] operatorInput = {0, 0, 0}; //last input set from joystick update
-    private double index = 0;
     private PIDSourceType type = PIDSourceType.kDisplacement;
     private DriveControlState driveControlState = OPEN_LOOP;
     private AdaptivePurePursuitController pathFollowingController;
@@ -68,11 +65,11 @@ public class RobotDriveV4 extends Subsystem implements PIDOutput, PIDSource {
                 case PATH_FOLLOWING_CONTROL:
                     updatePathFollower();
                     if (isFinishedPath()) stop();
-                    return;
+                    break;
 
                 case PROFILING_TEST:
                     driveTank(Constants.MP_TESTSPEED, Constants.MP_TESTSPEED);
-                    return;
+                    break;
 
                 default: //open loop
                     if(DriverStation.getInstance().isOperatorControl())operatorInput = getAdjStick();
@@ -182,7 +179,7 @@ public class RobotDriveV4 extends Subsystem implements PIDOutput, PIDSource {
         reset();
         RobotMap.driveFrontLeft.set(ControlMode.Velocity, 0);
         RobotMap.driveFrontLeft.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
-        RobotMap.driveFrontLeft.selectProfileSlot(0, 0);
+        RobotMap.driveFrontLeft.selectProfileSlot(0, Constants.PID_IDX);
         RobotMap.driveFrontLeft.config_kF(0, Constants.getLeftKF(), 0);
         RobotMap.driveFrontLeft.config_kP(0, Constants.getLeftKP(), 0);
         RobotMap.driveFrontLeft.config_kI(0, Constants.getLeftKI(), 0);
@@ -191,7 +188,7 @@ public class RobotDriveV4 extends Subsystem implements PIDOutput, PIDSource {
 
         RobotMap.driveFrontRight.set(ControlMode.Velocity, 0);
         RobotMap.driveFrontRight.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
-        RobotMap.driveFrontRight.selectProfileSlot(0, 0);
+        RobotMap.driveFrontRight.selectProfileSlot(0, Constants.PID_IDX);
         RobotMap.driveFrontRight.config_kF(0, Constants.getRightKF(), 0);
         RobotMap.driveFrontRight.config_kP(0, Constants.getRightKP(), 0);
         RobotMap.driveFrontRight.config_kI(0, Constants.getRightKI(), 0);
