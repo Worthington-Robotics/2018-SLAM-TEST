@@ -55,7 +55,7 @@ public class Robot extends TimedRobot
     @Override
     public void disabledInit() 
     {
-        
+        RobotMap.loggingSystem.enablePrint(false);
     }
 
     @Override
@@ -95,7 +95,8 @@ public class Robot extends TimedRobot
     @Override
     public void teleopInit() 
     {
-        RobotMap.robotDriveV4.configTeleop();
+        RobotMap.loggingSystem.enablePrint(true);
+        RobotMap.robotDriveV4.configAuto();
     }
 
     /**

@@ -11,26 +11,23 @@ public class Constants {
     private static boolean isCompBot = false; //change this to use competition or non-competition constants
     public static String ROBOT_NAME = "Cube Crusher";
 
-    public static boolean ENABLE_MP_TEST_MODE = false; //enables Teleop Motion profiling test mode code in teleop drive
+    public static boolean ENABLE_MP_TEST_MODE = true; //enables motion profiling test across all modes
 
     public static double DRIVETRAIN_UPDATE_RATE = 0.01;
     public static double LOGGING_UPDATE_RATE = 0.020;
     public static int OBSERVATION_BUFFER_SIZE = 10;
-
     public static double TRACK_LENGTH_INCHES = 8.265;
     public static double TRACK_WIDTH_INCHES = 23.8;
-    public static double TRACK_EFFECTIVE_DIAMETER = (TRACK_WIDTH_INCHES * TRACK_WIDTH_INCHES + TRACK_LENGTH_INCHES * TRACK_LENGTH_INCHES)
-            / TRACK_WIDTH_INCHES;
+    public static double TRACK_EFFECTIVE_DIAMETER = (TRACK_WIDTH_INCHES * TRACK_WIDTH_INCHES + TRACK_LENGTH_INCHES * TRACK_LENGTH_INCHES) / TRACK_WIDTH_INCHES;
     public static double TRACK_SCRUB_FACTOR = 0.5;
     public static double WHEEL_DIAMETER = 6.0;
     public static double COUNTS_PER_REV = 4096;
-    // Path following constants
     public static double PATH_FOLLOWING_LOOKAHEAD = 24.0; // inches
-    public static double PATH_FOLLOWING_MAX_VELOCITY = 120.0; // inches/sec
-    public static double PATH_FOLLOWING_MAX_ACCELERATION = 80.0; // inches/sec^2
+    public static double PATH_FOLLOWING_MAX_VELOCITY = 60.0; // inches/sec
+    public static double PATH_FOLLOWING_MAX_ACCELERATION = 36.0; // inches/sec^2
 
-    public static String DRIVE_PATH_1 = "/media/sda1";
-    public static String DRIVE_PATH_2 = "/media/sda2";
+    public static String DRIVE_PATH_1 = "/media/sda";
+    public static String DRIVE_PATH_2 = "/media/sdb";
 
 
     /*
@@ -148,13 +145,14 @@ public class Constants {
      * || Spilt Constants ||
      * ---------------------
      */
+    public static double MP_TESTSPEED = 220; //8 inches per second
 
-    private static double PRACTICE_RIGHT_KF = 0.3000;
+    private static double PRACTICE_RIGHT_KF = 0.2000;
     private static double PRACTICE_RIGHT_KP = 0.0000;
     private static double PRACTICE_RIGHT_KI = 0.0000;
     private static double PRACTICE_RIGHT_KD = 0.0000;
 
-    private static double PRACTICE_LEFT_KF = 0.3000;
+    private static double PRACTICE_LEFT_KF = 0.2000;
     private static double PRACTICE_LEFT_KP = 0.0000;
     private static double PRACTICE_LEFT_KI = 0.0000;
     private static double PRACTICE_LEFT_KD = 0.0000;

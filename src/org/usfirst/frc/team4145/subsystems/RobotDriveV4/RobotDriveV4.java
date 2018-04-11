@@ -16,12 +16,13 @@ import org.usfirst.frc.team4145.shared.AutoTrajectory.RigidTransform2d;
 import org.usfirst.frc.team4145.shared.MixedDrive;
 
 import static org.usfirst.frc.team4145.subsystems.RobotDriveV4.RobotDriveV4.DriveControlState.OPEN_LOOP;
+import static org.usfirst.frc.team4145.subsystems.RobotDriveV4.RobotDriveV4.DriveControlState.PROFILING_TEST;
 
 
 public class RobotDriveV4 extends Subsystem implements PIDOutput, PIDSource {
 
     public enum DriveControlState {
-        OPEN_LOOP("Open Loop"), PATH_FOLLOWING_CONTROL("Path following");
+        OPEN_LOOP("Open Loop"), PATH_FOLLOWING_CONTROL("Path following"), PROFILING_TEST("Profiling test");
         private String s;
 
         DriveControlState(String name){
@@ -37,7 +38,6 @@ public class RobotDriveV4 extends Subsystem implements PIDOutput, PIDSource {
     //used internally for data
     private MixedDrive m_MixedDriveInstance;
     private Notifier m_NotifierInstance;
-    private boolean isProfiling = false;
     private PIDController gyroLock;
     private double pidOutput = 0; //DO NOT MODIFY
     private boolean enLock = false;
@@ -53,8 +53,8 @@ public class RobotDriveV4 extends Subsystem implements PIDOutput, PIDSource {
         m_MixedDriveInstance = new MixedDrive(RobotMap.driveFrontLeft, RobotMap.driveRearLeft, RobotMap.driveFrontRight, RobotMap.driveRearRight);
         m_NotifierInstance = new Notifier(periodic);
         reset();
-        startPeriodic();
         initGyro();
+        startPeriodic();
     }
 
     public void startPeriodic(){
@@ -62,31 +62,31 @@ public class RobotDriveV4 extends Subsystem implements PIDOutput, PIDSource {
     }
 
     private Runnable periodic = () -> {
-        if(DriverStation.getInstance().isOperatorControl() && DriverStation.getInstance().isEnabled()) {
-            operatorInput = getAdjStick();
-            if (isReversed) {
-                operatorInput[0] *= -1;
-                operatorInput[1] *= -1;
-            }
-            isLowGear = Robot.oi.getMasterStick().getPOV() >= 0;
-            if (isLowGear) {
-                operatorInput[0] *= Constants.getTeleopYCutPercentage();
-                operatorInput[1] *= Constants.getTeleopXCutPercentage();
-            }
-            if (enLock) operatorInput[2] = pidOutput;
-            else setTarget(getGyro()); // Safety feature in case PID gets enabled
-            if(Constants.ENABLE_MP_TEST_MODE) operatorInput = motionProfileTestMode();
-            driveCartesian(operatorInput[1], -operatorInput[0], operatorInput[2]);
-        }
-        if(DriverStation.getInstance().isAutonomous() && DriverStation.getInstance().isEnabled()){
-            if(driveControlState == DriveControlState.PATH_FOLLOWING_CONTROL){
-                updatePathFollower();
-                if (isFinishedPath()) {
-                    stop();
-                }
-            }
-            else{
-                driveCartesian(operatorInput[1], -operatorInput[0], operatorInput[2]);
+        if(Constants.ENABLE_MP_TEST_MODE) driveControlState = PROFILING_TEST;
+        if(DriverStation.getInstance().isEnabled()){
+            switch (driveControlState){
+                case PATH_FOLLOWING_CONTROL:
+                    updatePathFollower();
+                    if (isFinishedPath()) stop();
+                    return;
+
+                case PROFILING_TEST:
+                    driveTank(Constants.MP_TESTSPEED, Constants.MP_TESTSPEED);
+                    return;
+
+                default: //open loop
+                    if(DriverStation.getInstance().isOperatorControl())operatorInput = getAdjStick();
+                    if (isReversed) {
+                        operatorInput[0] *= -1;
+                        operatorInput[1] *= -1;
+                    }
+                    if (Robot.oi.getMasterStick().getPOV() >= 0) {
+                        operatorInput[0] *= Constants.getTeleopYCutPercentage();
+                        operatorInput[1] *= Constants.getTeleopXCutPercentage();
+                    }
+                    if (enLock) operatorInput[2] = pidOutput;
+                    else setTarget(getGyro()); // Safety feature in case PID gets enabled
+                    driveCartesian(operatorInput[1], -operatorInput[0], operatorInput[2]);
             }
         }
         smartDashboardUpdates();
@@ -100,8 +100,16 @@ public class RobotDriveV4 extends Subsystem implements PIDOutput, PIDSource {
         return -RobotMap.driveFrontLeft.getSensorCollection().getQuadraturePosition();
     }
 
+    public double getLeftVelocity(){
+        return -RobotMap.driveFrontLeft.getSensorCollection().getQuadratureVelocity();
+    }
+
     public double getRightEncoder(){
         return RobotMap.driveFrontRight.getSensorCollection().getQuadraturePosition();
+    }
+
+    public double getRightVelocity(){
+        return RobotMap.driveFrontRight.getSensorCollection().getQuadratureVelocity();
     }
 
     public void setOperatorInput(double[] input){
@@ -190,8 +198,8 @@ public class RobotDriveV4 extends Subsystem implements PIDOutput, PIDSource {
         RobotMap.driveFrontRight.config_kD(0, Constants.getRightKD(), 0);
         RobotMap.driveFrontRight.config_IntegralZone(0, 0, 0);
 
-        RobotMap.driveRearLeft.set(ControlMode.Follower, RobotMap.driveFrontLeft.getBaseID());
-        RobotMap.driveRearRight.set(ControlMode.Follower, RobotMap.driveFrontRight.getBaseID());
+        RobotMap.driveRearLeft.set(ControlMode.Follower, RobotMap.driveFrontLeft.getDeviceID());
+        RobotMap.driveRearRight.set(ControlMode.Follower, RobotMap.driveFrontRight.getDeviceID());
     }
 
     public void reset(){
@@ -213,6 +221,7 @@ public class RobotDriveV4 extends Subsystem implements PIDOutput, PIDSource {
     private void smartDashboardUpdates() {
         SmartDashboard.putNumber("FPGA Time", Timer.getFPGATimestamp());
         SmartDashboard.putNumber("Gyro Angle", getGyro());
+        SmartDashboard.putNumber("Gyro Target", gyroLock.getSetpoint());
         SmartDashboard.putNumber("Left Motor Voltage", RobotMap.driveFrontLeft.getMotorOutputVoltage());
         SmartDashboard.putNumber("Right Motor Voltage", RobotMap.driveFrontRight.getMotorOutputVoltage());
         SmartDashboard.putNumber("Left Talon Voltage", RobotMap.driveRearLeft.getBusVoltage());
@@ -221,6 +230,8 @@ public class RobotDriveV4 extends Subsystem implements PIDOutput, PIDSource {
         SmartDashboard.putNumber("Left Wheel Encoder", getLeftEncoder());
         SmartDashboard.putNumber("Right Wheel Distance", getRightEncoder() * ((Constants.WHEEL_DIAMETER * Math.PI) / Constants.COUNTS_PER_REV));
         SmartDashboard.putNumber("Left Wheel Distance", getLeftEncoder() * ((Constants.WHEEL_DIAMETER * Math.PI) / Constants.COUNTS_PER_REV));
+        SmartDashboard.putNumber("Right Wheel Velocity", getRightVelocity());
+        SmartDashboard.putNumber("Left Wheel Velocity", getLeftVelocity());
         SmartDashboard.putString("Drive Control Mode", driveControlState.toString());
     }
 

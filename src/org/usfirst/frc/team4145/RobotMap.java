@@ -42,6 +42,7 @@ public class RobotMap {
 
         // all Motor controller objects
         driveFrontLeft = new WPI_TalonSRX(1);
+        System.out.println(driveFrontLeft.getDeviceID());
         driveRearLeft = new WPI_TalonSRX(2);
         driveFrontRight = new WPI_TalonSRX(3);
         driveRearRight = new WPI_TalonSRX(4);
@@ -57,16 +58,18 @@ public class RobotMap {
     }
 
     private static void addLoggingKeys(){
-        RobotMap.loggingSystem.addWatchKey("Auto State");
-        RobotMap.loggingSystem.addWatchKey("Left Wheel Encoder");
-        RobotMap.loggingSystem.addWatchKey("Right Wheel Encoder");
-        RobotMap.loggingSystem.addWatchKey("Gyro Angle");
-        RobotMap.loggingSystem.addWatchKey("Gyro Target");
-        RobotMap.loggingSystem.addWatchKey("Lift Encoder");
-        RobotMap.loggingSystem.addWatchKey("Lift Encoder Target");
-        RobotMap.loggingSystem.addWatchKey("In Auto");
-        RobotMap.loggingSystem.addWatchKey("Left Motor Voltage");
-        RobotMap.loggingSystem.addWatchKey("Right Motor Voltage");
-        RobotMap.loggingSystem.addWatchKey("Left Talon Voltage");
+        loggingSystem.addWatchKey("Auto State");
+        loggingSystem.addWatchKey("Left Wheel Encoder");
+        loggingSystem.addWatchKey("Right Wheel Encoder");
+        loggingSystem.addWatchKey("Gyro Angle");
+        loggingSystem.addWatchKey("Gyro Target");
+        loggingSystem.addWatchKey("Lift Encoder");
+        loggingSystem.addWatchKey("Lift Encoder Target");
+        loggingSystem.addWatchKey("In Auto");
+        loggingSystem.addWatchKey("Left Motor Voltage");
+        loggingSystem.addWatchKey("Right Motor Voltage");
+        loggingSystem.addWatchKey("Left Talon Voltage");
+        loggingSystem.addWatchKey("Right Wheel Velocity");
+        loggingSystem.addWatchKey("Left Wheel Velocity");
     }
 }

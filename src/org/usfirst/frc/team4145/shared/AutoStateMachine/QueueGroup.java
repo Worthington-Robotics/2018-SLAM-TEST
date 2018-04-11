@@ -2,7 +2,10 @@ package org.usfirst.frc.team4145.shared.AutoStateMachine;
 
 import edu.wpi.first.wpilibj.command.Command;
 import jaci.pathfinder.Trajectory;
+import org.usfirst.frc.team4145.commands.FollowPath;
+import org.usfirst.frc.team4145.shared.AutoTrajectory.Path;
 
+import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
@@ -22,6 +25,10 @@ public class QueueGroup {
         queuedStates = new ConcurrentLinkedQueue<>();
     }
 
+    protected void addDrive(List<Path.Waypoint> path, boolean isReversed){
+        requireNonNull(path, "Command cannot be null");
+        queuedStates.add(new CommandQueueGroup(new Command[]{new FollowPath(new Path(path), isReversed)}, 50, false));
+    }
 
     protected void addSequential(Command command, long timeOutMs) {
         requireNonNull(command, "Command cannot be null");

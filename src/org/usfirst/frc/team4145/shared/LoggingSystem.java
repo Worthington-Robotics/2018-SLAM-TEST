@@ -40,7 +40,7 @@ public class LoggingSystem {
             initSuccess = true;
         } catch (Exception e) {
             DriverStation.reportError("Failed to initialize log on file!", false);
-            //e.printStackTrace();
+            e.printStackTrace();
         }
     }
 
