@@ -232,6 +232,11 @@ public class RobotDriveV4 extends Subsystem implements PIDOutput, PIDSource {
         m_MixedDriveInstance.driveCartesian(ySpeed, xSpeed, zRotation);
     }
 
+    /**
+     * method for driving in tank mode
+     * @param leftSpeed left speed in RPM
+     * @param rightSpeed right speed in RPM
+     */
     private void driveTank(double leftSpeed, double rightSpeed) {
         m_MixedDriveInstance.tankDrive((leftSpeed * 512)/75 , (rightSpeed * 512)/75);
     }
