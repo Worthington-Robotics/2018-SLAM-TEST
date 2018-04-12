@@ -218,6 +218,12 @@ public class RobotDriveV4 extends Subsystem implements PIDOutput, PIDSource {
     }
 
 
+    /**
+     * method for driving in meccanum cartesian mode
+     * @param ySpeed speed scalar (-1,1)
+     * @param xSpeed speed scalar (-1,1)
+     * @param zRotation (speed scalar) (-1,1)
+     */
     private void driveCartesian(double ySpeed, double xSpeed, double zRotation) {
         m_MixedDriveInstance.driveCartesian(ySpeed, xSpeed, zRotation);
     }
@@ -228,6 +234,7 @@ public class RobotDriveV4 extends Subsystem implements PIDOutput, PIDSource {
      * @param rightSpeed right speed in RPM
      */
     private void driveTank(double leftSpeed, double rightSpeed) {
+        SmartDashboard.putNumberArray("Tank RPMS", new double[]{leftSpeed, rightSpeed});
         m_MixedDriveInstance.tankDrive((leftSpeed * 512)/75 , (rightSpeed * 512)/75);
     }
 
