@@ -83,6 +83,10 @@ public class RobotDriveV4 extends Subsystem implements PIDOutput, PIDSource {
         return ((RobotMap.ahrs.getYaw() + 360) % 360); //add 360 to make all positive then mod by 360 to get remainder
     }
 
+    public double getGyroContinuous(){
+        return RobotMap.ahrs.getAngle();
+    }
+
     public double getLeftEncoder(){
         return -RobotMap.driveFrontLeft.getSensorCollection().getQuadraturePosition();
     }
@@ -113,7 +117,7 @@ public class RobotDriveV4 extends Subsystem implements PIDOutput, PIDSource {
             configAuto();
         }
         pathFollowingController = new AdaptivePurePursuitController(Constants.PATH_FOLLOWING_LOOKAHEAD,
-                Constants.PATH_FOLLOWING_MAX_ACCELERATION, Constants.DRIVETRAIN_UPDATE_RATE, path, reversed, 0.25);
+                Constants.PATH_FOLLOWING_MAX_ACCELERATION, Constants.DRIVETRAIN_UPDATE_RATE, path, reversed, 1);
         driveControlState = DriveControlState.PATH_FOLLOWING_CONTROL;
         updatePathFollower();
     }
@@ -184,6 +188,7 @@ public class RobotDriveV4 extends Subsystem implements PIDOutput, PIDSource {
         SmartDashboard.putNumber("Left Wheel Velocity", uPer100MsToRPM(getLeftVelocity()));
         SmartDashboard.putString("Drive Control Mode", driveControlState.toString());
         SmartDashboard.putBoolean("Path Finished", isFinishedPath());
+        SmartDashboard.putNumber("Continuous gyro heading", getGyroContinuous());
     }
 
     private static double inchesToRotations(double inches) {

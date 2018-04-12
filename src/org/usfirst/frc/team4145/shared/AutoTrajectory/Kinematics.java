@@ -53,6 +53,6 @@ public class Kinematics {
             return new DriveVelocity(velocity.dx, velocity.dx);
         }
         double delta_v = Constants.TRACK_WIDTH_INCHES * velocity.dtheta / (2 * Constants.TRACK_SCRUB_FACTOR);
-        return new DriveVelocity(velocity.dx - delta_v, velocity.dx + delta_v);
+        return new DriveVelocity(velocity.dx + delta_v, velocity.dx - delta_v);
     }
 }

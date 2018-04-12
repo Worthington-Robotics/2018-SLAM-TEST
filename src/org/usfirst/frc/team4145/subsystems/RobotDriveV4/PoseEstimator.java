@@ -38,7 +38,7 @@ public class PoseEstimator {
         double currentTime = Timer.getFPGATimestamp();
         double currentLeftEncoder = RobotMap.robotDriveV4.getLeftEncoder() * ((Constants.WHEEL_DIAMETER * 3.14159) / Constants.COUNTS_PER_REV);
         double currentRightEncoder = RobotMap.robotDriveV4.getRightEncoder() * ((Constants.WHEEL_DIAMETER * 3.14159) / Constants.COUNTS_PER_REV);
-        Rotation2d gyro = Rotation2d.fromDegrees(RobotMap.robotDriveV4.getGyro());
+        Rotation2d gyro = Rotation2d.fromDegrees(RobotMap.robotDriveV4.getGyroContinuous());
         RigidTransform2d odometry = generateOdometryFromSensors((currentLeftEncoder - leftPrevEncCount), (currentRightEncoder - rightPrevEncCount), gyro);
         addObservations(currentTime, odometry);
         outputToSmartDashboard();
