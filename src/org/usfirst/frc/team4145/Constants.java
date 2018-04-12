@@ -146,7 +146,7 @@ public class Constants {
      * || Spilt Constants ||
      * ---------------------
      */
-    public static double MP_TESTSPEED = 1600; //8 inches per second
+    public static double MP_TESTSPEED = 400; //800 rpm
 
     private static double PRACTICE_RIGHT_KF = 0.0450; //nominal: 0.0450
     private static double PRACTICE_RIGHT_KP = 0.0500;

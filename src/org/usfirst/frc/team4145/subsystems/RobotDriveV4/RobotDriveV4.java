@@ -137,21 +137,6 @@ public class RobotDriveV4 extends Subsystem implements PIDOutput, PIDSource {
                 || driveControlState != DriveControlState.PATH_FOLLOWING_CONTROL;
     }
 
-    private void updatePathFollower() {
-        RigidTransform2d robot_pose = RobotMap.robotPose.getLatestFieldToVehicle().getValue();
-        RigidTransform2d.Delta command = pathFollowingController.update(robot_pose, Timer.getFPGATimestamp());
-        Kinematics.DriveVelocity setpoint = Kinematics.inverseKinematics(command);
-
-        // Scale the command to respect the max velocity limits
-        double max_vel = 0.0;
-        max_vel = Math.max(max_vel, Math.abs(setpoint.left));
-        max_vel = Math.max(max_vel, Math.abs(setpoint.right));
-        if (max_vel > Constants.PATH_FOLLOWING_MAX_VELOCITY) {
-            double scaling = Constants.PATH_FOLLOWING_MAX_VELOCITY / max_vel;
-            setpoint = new Kinematics.DriveVelocity(setpoint.left * scaling, setpoint.right * scaling);
-        }
-        driveTank(inchesPerSecondToRpm(setpoint.left), inchesPerSecondToRpm(setpoint.right));
-    }
 
     public double pidGet(){
         return getGyro();
@@ -161,10 +146,7 @@ public class RobotDriveV4 extends Subsystem implements PIDOutput, PIDSource {
     }
 
     public void setDynamicBrakeMode(boolean brakeFL, boolean brakeRL, boolean brakeFR, boolean brakeRR) {
-        RobotMap.driveFrontLeft.setNeutralMode(brakeFL? NeutralMode.Brake : NeutralMode.Coast);
-        RobotMap.driveRearLeft.setNeutralMode(brakeRL? NeutralMode.Brake : NeutralMode.Coast);
-        RobotMap.driveFrontRight.setNeutralMode(brakeFR? NeutralMode.Brake : NeutralMode.Coast);
-        RobotMap.driveRearRight.setNeutralMode(brakeRR? NeutralMode.Brake : NeutralMode.Coast);
+        m_MixedDriveInstance.setDynamicBrakeMode(brakeFL,brakeRL, brakeFR, brakeRR);
     }
 
     public void configTeleop(){
@@ -177,39 +159,20 @@ public class RobotDriveV4 extends Subsystem implements PIDOutput, PIDSource {
 
     public void configAuto() {
         reset();
-        RobotMap.driveFrontLeft.set(ControlMode.Velocity, 0);
-        RobotMap.driveFrontLeft.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
-        RobotMap.driveFrontLeft.selectProfileSlot(0, Constants.PID_IDX);
-        RobotMap.driveFrontLeft.config_kF(0, Constants.getLeftKF(), 0);
-        RobotMap.driveFrontLeft.config_kP(0, Constants.getLeftKP(), 0);
-        RobotMap.driveFrontLeft.config_kI(0, Constants.getLeftKI(), 0);
-        RobotMap.driveFrontLeft.config_kD(0, Constants.getLeftKD(), 0);
-        RobotMap.driveFrontLeft.config_IntegralZone(0, 0, 0);
-
-        RobotMap.driveFrontRight.set(ControlMode.Velocity, 0);
-        RobotMap.driveFrontRight.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
-        RobotMap.driveFrontRight.selectProfileSlot(0, Constants.PID_IDX);
-        RobotMap.driveFrontRight.config_kF(0, Constants.getRightKF(), 0);
-        RobotMap.driveFrontRight.config_kP(0, Constants.getRightKP(), 0);
-        RobotMap.driveFrontRight.config_kI(0, Constants.getRightKI(), 0);
-        RobotMap.driveFrontRight.config_kD(0, Constants.getRightKD(), 0);
-        RobotMap.driveFrontRight.config_IntegralZone(0, 0, 0);
+        m_MixedDriveInstance.configureVelocityPIDF(MixedDrive.DriveSelector.FRONT_LEFT, Constants.getLeftKP(),
+                Constants.getLeftKI(), Constants.getLeftKD(), Constants.getLeftKF());
+        m_MixedDriveInstance.configureVelocityPIDF(MixedDrive.DriveSelector.FRONT_RIGHT, Constants.getRightKP(),
+                Constants.getRightKI(), Constants.getRightKD(), Constants.getRightKF());
 
         RobotMap.driveRearLeft.set(ControlMode.Follower, RobotMap.driveFrontLeft.getDeviceID());
         RobotMap.driveRearRight.set(ControlMode.Follower, RobotMap.driveFrontRight.getDeviceID());
     }
 
     public void reset(){
-        resetEncoders();
+        m_MixedDriveInstance.resetSelectedSensors();
         resetGyro();
     }
 
-    private void resetEncoders(){
-        RobotMap.driveFrontLeft.setSelectedSensorPosition(0,0,0);
-        RobotMap.driveRearLeft.setSelectedSensorPosition(0,0,0);
-        RobotMap.driveFrontRight.setSelectedSensorPosition(0,0,0);
-        RobotMap.driveRearRight.setSelectedSensorPosition(0,0,0);
-    }
 
     private void resetGyro(){
         RobotMap.ahrs.reset();
@@ -227,8 +190,8 @@ public class RobotDriveV4 extends Subsystem implements PIDOutput, PIDSource {
         SmartDashboard.putNumber("Left Wheel Encoder", getLeftEncoder());
         SmartDashboard.putNumber("Right Wheel Distance", getRightEncoder() * ((Constants.WHEEL_DIAMETER * Math.PI) / Constants.COUNTS_PER_REV));
         SmartDashboard.putNumber("Left Wheel Distance", getLeftEncoder() * ((Constants.WHEEL_DIAMETER * Math.PI) / Constants.COUNTS_PER_REV));
-        SmartDashboard.putNumber("Right Wheel Velocity", getRightVelocity());
-        SmartDashboard.putNumber("Left Wheel Velocity", getLeftVelocity());
+        SmartDashboard.putNumber("Right Wheel Velocity", (getRightVelocity() * 512) / 75.0);
+        SmartDashboard.putNumber("Left Wheel Velocity", (getLeftVelocity() * 512) / 75.0);
         SmartDashboard.putString("Drive Control Mode", driveControlState.toString());
     }
 
@@ -240,6 +203,22 @@ public class RobotDriveV4 extends Subsystem implements PIDOutput, PIDSource {
         return inchesToRotations(inches_per_second) * 60;
     }
 
+    private void updatePathFollower() {
+        RigidTransform2d robot_pose = RobotMap.robotPose.getLatestFieldToVehicle().getValue();
+        RigidTransform2d.Delta command = pathFollowingController.update(robot_pose, Timer.getFPGATimestamp());
+        Kinematics.DriveVelocity setpoint = Kinematics.inverseKinematics(command);
+
+        // Scale the command to respect the max velocity limits
+        double max_vel = 0.0;
+        max_vel = Math.max(max_vel, Math.abs(setpoint.left));
+        max_vel = Math.max(max_vel, Math.abs(setpoint.right));
+        if (max_vel > Constants.PATH_FOLLOWING_MAX_VELOCITY) {
+            double scaling = Constants.PATH_FOLLOWING_MAX_VELOCITY / max_vel;
+            setpoint = new Kinematics.DriveVelocity(setpoint.left * scaling, setpoint.right * scaling);
+        }
+        driveTank(inchesPerSecondToRpm(setpoint.left), inchesPerSecondToRpm(setpoint.right));
+    }
+
     private void initGyro(){
         gyroLock = new PIDController(Constants.getGyrolockKp(), Constants.getGyrolockKi(), Constants.getGyrolockKd(), this, this);
         gyroLock.setAbsoluteTolerance(Constants.getGyrolockTol());
@@ -248,13 +227,6 @@ public class RobotDriveV4 extends Subsystem implements PIDOutput, PIDSource {
         gyroLock.setContinuous();
     }
 
-    private double[] motionProfileTestMode(){
-        double[] test = {0.0, 0.0, 0.0};
-        test[0] = -0.000104 * index;
-        if (DriverStation.getInstance().isOperatorControl() && DriverStation.getInstance().isEnabled()) index++;
-        else index = 0;
-        return test;
-    }
 
     private void driveCartesian(double ySpeed, double xSpeed, double zRotation) {
         m_MixedDriveInstance.driveCartesian(ySpeed, xSpeed, zRotation);
