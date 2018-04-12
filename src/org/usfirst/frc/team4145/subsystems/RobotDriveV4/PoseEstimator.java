@@ -28,6 +28,8 @@ public class PoseEstimator {
     public void reset(double start_time, RigidTransform2d initial_field_to_vehicle){
         field_to_vehicle_ = new InterpolatingTreeMap<>(Constants.OBSERVATION_BUFFER_SIZE);
         field_to_vehicle_.put(new InterpolatingDouble(start_time), initial_field_to_vehicle);
+        leftPrevEncCount = 0;
+        rightPrevEncCount = 0;
     }
 
     public synchronized Map.Entry<InterpolatingDouble, RigidTransform2d> getLatestFieldToVehicle() {

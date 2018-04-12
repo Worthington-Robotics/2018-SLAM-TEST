@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="377f144d-be85-4a11-b46c-fae5da01b67c" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/org/usfirst/frc/team4145/shared/AutoTrajectory/Kinematics.java" afterPath="$PROJECT_DIR$/src/org/usfirst/frc/team4145/shared/AutoTrajectory/Kinematics.java" />
+      <change beforePath="$PROJECT_DIR$/src/org/usfirst/frc/team4145/Robot.java" afterPath="$PROJECT_DIR$/src/org/usfirst/frc/team4145/Robot.java" />
       <change beforePath="$PROJECT_DIR$/src/org/usfirst/frc/team4145/subsystems/RobotDriveV4/PoseEstimator.java" afterPath="$PROJECT_DIR$/src/org/usfirst/frc/team4145/subsystems/RobotDriveV4/PoseEstimator.java" />
-      <change beforePath="$PROJECT_DIR$/src/org/usfirst/frc/team4145/subsystems/RobotDriveV4/RobotDriveV4.java" afterPath="$PROJECT_DIR$/src/org/usfirst/frc/team4145/subsystems/RobotDriveV4/RobotDriveV4.java" />
       <change beforePath="$PROJECT_DIR$/src/org/usfirst/frc/team4145/testAuto.java" afterPath="$PROJECT_DIR$/src/org/usfirst/frc/team4145/testAuto.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -34,8 +32,8 @@
       <file leaf-file-name="Robot.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team4145/Robot.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1548">
-              <caret line="98" column="43" lean-forward="false" selection-start-line="98" selection-start-column="43" selection-end-line="98" selection-end-column="43" />
+            <state relative-caret-position="477">
+              <caret line="83" column="57" lean-forward="false" selection-start-line="83" selection-start-column="57" selection-end-line="83" selection-end-column="57" />
               <folding />
             </state>
           </provider>
@@ -102,10 +100,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RobotDriveV4.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="RobotDriveV4.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team4145/subsystems/RobotDriveV4/RobotDriveV4.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="483">
+            <state relative-caret-position="4305">
               <caret line="222" column="93" lean-forward="false" selection-start-line="222" selection-start-column="93" selection-end-line="222" selection-end-column="93" />
               <folding>
                 <element signature="e#674#675#0" expanded="true" />
@@ -147,49 +145,6 @@
                 <element signature="e#11855#11856#0" expanded="true" />
                 <element signature="e#11882#11883#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PoseEstimator.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team4145/subsystems/RobotDriveV4/PoseEstimator.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
-              <caret line="40" column="90" lean-forward="false" selection-start-line="40" selection-start-column="90" selection-end-line="40" selection-end-column="90" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RigidTransform2d.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team4145/shared/AutoTrajectory/RigidTransform2d.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="147">
-              <caret line="78" column="0" lean-forward="false" selection-start-line="78" selection-start-column="0" selection-end-line="78" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Translation2d.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team4145/shared/AutoTrajectory/Translation2d.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="477">
-              <caret line="41" column="15" lean-forward="false" selection-start-line="41" selection-start-column="15" selection-end-line="41" selection-end-column="15" />
-              <folding>
-                <element signature="e#1289#1290#0" expanded="true" />
-                <element signature="e#1359#1360#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Kinematics.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team4145/shared/AutoTrajectory/Kinematics.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="834">
-              <caret line="55" column="69" lean-forward="false" selection-start-line="55" selection-start-column="69" selection-end-line="55" selection-end-column="69" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -253,16 +208,16 @@
         <option value="$PROJECT_DIR$/src/org/usfirst/frc/team4145/subsystems/RobotDriveV3/RobotDriveV4.java" />
         <option value="$PROJECT_DIR$/src/org/usfirst/frc/team4145/commands/FollowPath.java" />
         <option value="$PROJECT_DIR$/src/org/usfirst/frc/team4145/shared/AutoStateMachine/QueueGroup.java" />
-        <option value="$PROJECT_DIR$/src/org/usfirst/frc/team4145/Robot.java" />
         <option value="$PROJECT_DIR$/src/org/usfirst/frc/team4145/RobotMap.java" />
         <option value="$PROJECT_DIR$/src/org/usfirst/frc/team4145/shared/LoggingSystem.java" />
         <option value="$PROJECT_DIR$/src/org/usfirst/frc/team4145/shared/MixedDrive.java" />
         <option value="$PROJECT_DIR$/src/org/usfirst/frc/team4145/Constants.java" />
-        <option value="$PROJECT_DIR$/src/org/usfirst/frc/team4145/subsystems/RobotDriveV4/PoseEstimator.java" />
-        <option value="$PROJECT_DIR$/src/org/usfirst/frc/team4145/testAuto.java" />
         <option value="$PROJECT_DIR$/src/org/usfirst/frc/team4145/shared/AutoTrajectory/Translation2d.java" />
         <option value="$PROJECT_DIR$/src/org/usfirst/frc/team4145/shared/AutoTrajectory/Kinematics.java" />
         <option value="$PROJECT_DIR$/src/org/usfirst/frc/team4145/subsystems/RobotDriveV4/RobotDriveV4.java" />
+        <option value="$PROJECT_DIR$/src/org/usfirst/frc/team4145/testAuto.java" />
+        <option value="$PROJECT_DIR$/src/org/usfirst/frc/team4145/Robot.java" />
+        <option value="$PROJECT_DIR$/src/org/usfirst/frc/team4145/subsystems/RobotDriveV4/PoseEstimator.java" />
       </list>
     </option>
   </component>
@@ -888,6 +843,101 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar://$USER_HOME$/wpilib/java/current/lib/WPILib-sources.jar!/edu/wpi/first/wpilibj/GyroBase.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="78">
+          <caret line="15" column="22" lean-forward="false" selection-start-line="15" selection-start-column="22" selection-end-line="15" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/wpilib/java/current/lib/WPILib-sources.jar!/edu/wpi/first/wpilibj/interfaces/Gyro.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-111">
+          <caret line="12" column="17" lean-forward="false" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/wpilib/user/java/lib/navx_frc.jar!/com/kauailabs/navx/frc/AHRS.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-9576">
+          <caret line="23" column="13" lean-forward="false" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/wpilib/user/java/lib/navx_frc.jar!/overview.htm">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team4145/shared/MixedDrive.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1262">
+          <caret line="104" column="48" lean-forward="false" selection-start-line="104" selection-start-column="48" selection-end-line="104" selection-end-column="48" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2177#2178#0" expanded="true" />
+            <element signature="e#2215#2216#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team4145/shared/AutoTrajectory/AdaptivePurePursuitController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="231">
+          <caret line="38" column="24" lean-forward="false" selection-start-line="38" selection-start-column="23" selection-end-line="38" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team4145/shared/AutoTrajectory/Kinematics.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="834">
+          <caret line="55" column="69" lean-forward="false" selection-start-line="55" selection-start-column="69" selection-end-line="55" selection-end-column="69" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team4145/shared/AutoTrajectory/Translation2d.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="756">
+          <caret line="41" column="15" lean-forward="false" selection-start-line="41" selection-start-column="15" selection-end-line="41" selection-end-column="15" />
+          <folding>
+            <element signature="e#1289#1290#0" expanded="true" />
+            <element signature="e#1359#1360#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team4145/RobotMap.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="519">
+          <caret line="60" column="56" lean-forward="false" selection-start-line="60" selection-start-column="56" selection-end-line="60" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team4145/testAuto.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="15" column="10" lean-forward="false" selection-start-line="15" selection-start-column="10" selection-end-line="15" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team4145/Robot.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="477">
+          <caret line="83" column="57" lean-forward="false" selection-start-line="83" selection-start-column="57" selection-end-line="83" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team4145/Constants.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-2925">
@@ -937,112 +987,25 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$USER_HOME$/wpilib/java/current/lib/WPILib-sources.jar!/edu/wpi/first/wpilibj/GyroBase.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="78">
-          <caret line="15" column="22" lean-forward="false" selection-start-line="15" selection-start-column="22" selection-end-line="15" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/wpilib/java/current/lib/WPILib-sources.jar!/edu/wpi/first/wpilibj/interfaces/Gyro.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-111">
-          <caret line="12" column="17" lean-forward="false" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/wpilib/user/java/lib/navx_frc.jar!/com/kauailabs/navx/frc/AHRS.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-9576">
-          <caret line="23" column="13" lean-forward="false" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/wpilib/user/java/lib/navx_frc.jar!/overview.htm">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team4145/Robot.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1548">
-          <caret line="98" column="43" lean-forward="false" selection-start-line="98" selection-start-column="43" selection-end-line="98" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team4145/RobotMap.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="519">
-          <caret line="60" column="56" lean-forward="false" selection-start-line="60" selection-start-column="56" selection-end-line="60" selection-end-column="56" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team4145/shared/MixedDrive.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1262">
-          <caret line="104" column="48" lean-forward="false" selection-start-line="104" selection-start-column="48" selection-end-line="104" selection-end-column="48" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2177#2178#0" expanded="true" />
-            <element signature="e#2215#2216#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team4145/shared/AutoTrajectory/AdaptivePurePursuitController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="38" column="24" lean-forward="false" selection-start-line="38" selection-start-column="23" selection-end-line="38" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team4145/testAuto.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="15" column="10" lean-forward="false" selection-start-line="15" selection-start-column="10" selection-end-line="15" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team4145/subsystems/RobotDriveV4/PoseEstimator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="40" column="90" lean-forward="false" selection-start-line="40" selection-start-column="90" selection-end-line="40" selection-end-column="90" />
+        <state relative-caret-position="357">
+          <caret line="31" column="30" lean-forward="false" selection-start-line="31" selection-start-column="30" selection-end-line="31" selection-end-column="30" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team4145/shared/AutoTrajectory/RigidTransform2d.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
+        <state relative-caret-position="1407">
           <caret line="78" column="0" lean-forward="false" selection-start-line="78" selection-start-column="0" selection-end-line="78" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team4145/shared/AutoTrajectory/Translation2d.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="477">
-          <caret line="41" column="15" lean-forward="false" selection-start-line="41" selection-start-column="15" selection-end-line="41" selection-end-column="15" />
-          <folding>
-            <element signature="e#1289#1290#0" expanded="true" />
-            <element signature="e#1359#1360#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team4145/subsystems/RobotDriveV4/RobotDriveV4.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="483">
+        <state relative-caret-position="4305">
           <caret line="222" column="93" lean-forward="false" selection-start-line="222" selection-start-column="93" selection-end-line="222" selection-end-column="93" />
           <folding>
             <element signature="e#674#675#0" expanded="true" />
@@ -1084,14 +1047,6 @@
             <element signature="e#11855#11856#0" expanded="true" />
             <element signature="e#11882#11883#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/usfirst/frc/team4145/shared/AutoTrajectory/Kinematics.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="834">
-          <caret line="55" column="69" lean-forward="false" selection-start-line="55" selection-start-column="69" selection-end-line="55" selection-end-column="69" />
-          <folding />
         </state>
       </provider>
     </entry>

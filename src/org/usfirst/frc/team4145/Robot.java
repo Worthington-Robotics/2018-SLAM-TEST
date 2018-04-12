@@ -8,12 +8,14 @@
 package org.usfirst.frc.team4145;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team4145.commands.ExampleCommand;
 import org.usfirst.frc.team4145.shared.AutoStateMachine.AutoStateMachine;
+import org.usfirst.frc.team4145.shared.AutoTrajectory.RigidTransform2d;
 import org.usfirst.frc.team4145.shared.LoggingSystem;
 
 /**
@@ -79,6 +81,7 @@ public class Robot extends TimedRobot
     public void autonomousInit() 
     {
         RobotMap.robotDriveV4.configAuto();
+        RobotMap.robotPose.reset(Timer.getFPGATimestamp(), new RigidTransform2d());
         AutoStateMachine.runMachine(new testAuto(1).getQueuedStates());
 
     }
