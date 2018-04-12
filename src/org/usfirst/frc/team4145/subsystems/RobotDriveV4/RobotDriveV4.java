@@ -28,8 +28,8 @@ public class RobotDriveV4 extends Subsystem implements PIDOutput, PIDSource {
     private MixedDrive m_MixedDriveInstance;
     private Notifier m_NotifierInstance;
     private PIDController gyroLock;
-    private double pidOutput = 0, index = 0; //DO NOT MODIFY
-    private boolean enLock = false, isReversed = false, isLowGear = false;
+    private double pidOutput = 0; //DO NOT MODIFY
+    private boolean enLock = false, isReversed = false;
     private double[] operatorInput = {0, 0, 0}; //last input set from joystick update
     private PIDSourceType type = PIDSourceType.kDisplacement;
     private DriveControlState driveControlState = DriveControlState.OPEN_LOOP;
@@ -43,7 +43,7 @@ public class RobotDriveV4 extends Subsystem implements PIDOutput, PIDSource {
         startPeriodic();
     }
 
-    public void startPeriodic(){
+    private void startPeriodic(){
         m_NotifierInstance.startPeriodic(Constants.DRIVETRAIN_UPDATE_RATE);
     }
 
@@ -240,15 +240,11 @@ public class RobotDriveV4 extends Subsystem implements PIDOutput, PIDSource {
         else gyroLock.disable();
     }
 
-    public void setLowGear(boolean toSet){
-        isLowGear = toSet;
-    }
-
     private double[] getAdjStick() {
         double[] out = new double[3];
         out[0] = evalDeadBand(Robot.oi.getMasterStick().getY(), Constants.getTeleopDeadband()) * Constants.getTeleopYPercentage();
         out[1] = evalDeadBand(Robot.oi.getMasterStick().getX(), Constants.getTeleopDeadband()) * Constants.getTeleopXPercentage();
-        out[2] = evalDeadBand(Robot.oi.getMasterStick().getZ(), Constants.getTeleopDeadband()) * Constants.getTeleopZPercentage();;
+        out[2] = evalDeadBand(Robot.oi.getMasterStick().getZ(), Constants.getTeleopDeadband()) * Constants.getTeleopZPercentage();
         return out;
     }
 

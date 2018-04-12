@@ -5,8 +5,6 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
-import org.usfirst.frc.team4145.Constants;
-import org.usfirst.frc.team4145.RobotMap;
 
 public class MixedDrive extends MecanumDrive{
 
@@ -51,7 +49,7 @@ public class MixedDrive extends MecanumDrive{
 
     /**
      * use to configure multiple PID slots
-     * @param PID_IDX
+     * @param PID_IDX pid ID number (0 - 4)
      */
     public void setPID_IDX(int PID_IDX){
         this.PID_IDX = PID_IDX;
