@@ -19,7 +19,6 @@ public class Constants {
     public static double LOGGING_UPDATE_RATE = 0.020;
     public static int OBSERVATION_BUFFER_SIZE = 10;
     public static double TRACK_WIDTH_INCHES = 23.8;
-    public static double TRACK_EFFECTIVE_DIAMETER = TRACK_WIDTH_INCHES;
     public static double TRACK_SCRUB_FACTOR = 0.5;
     public static double WHEEL_DIAMETER = 6.0;
     public static double COUNTS_PER_REV = 4096;

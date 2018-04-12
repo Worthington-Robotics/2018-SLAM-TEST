@@ -19,7 +19,7 @@ public class Kinematics {
     public static RigidTransform2d.Delta forwardKinematics(double left_wheel_delta, double right_wheel_delta) {
         double linear_velocity = (left_wheel_delta + right_wheel_delta) / 2;
         double delta_v = (right_wheel_delta - left_wheel_delta) / 2;
-        double delta_rotation = delta_v * 2 * Constants.TRACK_SCRUB_FACTOR / Constants.TRACK_EFFECTIVE_DIAMETER;
+        double delta_rotation = delta_v * 2 * Constants.TRACK_SCRUB_FACTOR / Constants.TRACK_WIDTH_INCHES;
         return new RigidTransform2d.Delta(linear_velocity, 0, delta_rotation);
     }
 
@@ -52,7 +52,7 @@ public class Kinematics {
         if (Math.abs(velocity.dtheta) < kEpsilon) {
             return new DriveVelocity(velocity.dx, velocity.dx);
         }
-        double delta_v = Constants.TRACK_EFFECTIVE_DIAMETER * velocity.dtheta / (2 * Constants.TRACK_SCRUB_FACTOR);
+        double delta_v = Constants.TRACK_WIDTH_INCHES * velocity.dtheta / (2 * Constants.TRACK_SCRUB_FACTOR);
         return new DriveVelocity(velocity.dx - delta_v, velocity.dx + delta_v);
     }
 }

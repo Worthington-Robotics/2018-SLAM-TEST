@@ -73,6 +73,7 @@ public class RobotDriveV4 extends Subsystem implements PIDOutput, PIDSource {
                     if (enLock) operatorInput[2] = pidOutput;
                     else setTarget(getGyro()); // Safety feature in case PID gets enabled
                     driveCartesian(operatorInput[1], -operatorInput[0], operatorInput[2]);
+                    break;
             }
         }
         smartDashboardUpdates();
