@@ -117,7 +117,7 @@ public class RobotDriveV4 extends Subsystem implements PIDOutput, PIDSource {
             configAuto();
         }
         pathFollowingController = new AdaptivePurePursuitController(Constants.PATH_FOLLOWING_LOOKAHEAD,
-                Constants.PATH_FOLLOWING_MAX_ACCELERATION, Constants.DRIVETRAIN_UPDATE_RATE, path, reversed, 1);
+                Constants.PATH_FOLLOWING_MAX_ACCELERATION, Constants.DRIVETRAIN_UPDATE_RATE, path, reversed, .25);
         driveControlState = DriveControlState.PATH_FOLLOWING_CONTROL;
         updatePathFollower();
     }

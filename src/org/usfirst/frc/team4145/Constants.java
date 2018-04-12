@@ -18,7 +18,7 @@ public class Constants {
     public static double DRIVETRAIN_UPDATE_RATE = 0.01;
     public static double LOGGING_UPDATE_RATE = 0.020;
     public static int OBSERVATION_BUFFER_SIZE = 10;
-    public static double TRACK_WIDTH_INCHES = 23.8;
+    public static double TRACK_WIDTH_INCHES = 23.5;
     public static double TRACK_SCRUB_FACTOR = 0.5;
     public static double WHEEL_DIAMETER = 6.0;
     public static double COUNTS_PER_REV = 4096;
@@ -147,15 +147,17 @@ public class Constants {
      */
     public static double MP_TESTSPEED = 152; //100 rpm ~ 31 in/s ~ 3ft/s
 
-    private static double PRACTICE_RIGHT_KF = 0.3200; //nominal: 0.3800
-    private static double PRACTICE_RIGHT_KP = 0.4000; //nominal: 0.1500
+    private static double PRACTICE_RIGHT_KF = 0.3200; //nominal: 0.3200
+    private static double PRACTICE_RIGHT_KP = 1.0000; //nominal: 0.1500
     private static double PRACTICE_RIGHT_KI = 0.0000;
-    private static double PRACTICE_RIGHT_KD = 0.0000;
+    private static double PRACTICE_RIGHT_KD = 6.0000;
 
-    private static double PRACTICE_LEFT_KF = 0.3200; //nominal: 0.3800
-    private static double PRACTICE_LEFT_KP = 0.4000; //nominal: 0.1500
+    private static double PRACTICE_LEFT_KF = 0.3200; //nominal: 0.3200
+    private static double PRACTICE_LEFT_KP = 1.0000; //nominal: 0.1500
     private static double PRACTICE_LEFT_KI = 0.0000;
-    private static double PRACTICE_LEFT_KD = 0.0000;
+    private static double PRACTICE_LEFT_KD = 6.0000;
+
+
 
     private static double COMPETITION_RIGHT_KF = 0.3900;
     private static double COMPETITION_RIGHT_KP = 0.4000;
