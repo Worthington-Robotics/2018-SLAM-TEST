@@ -1,27 +1,16 @@
 package org.usfirst.frc.team4145.subsystems.RobotDriveV4;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.FeedbackDevice;
-import com.ctre.phoenix.motorcontrol.NeutralMode;
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.usfirst.frc.team4145.Constants;
-import org.usfirst.frc.team4145.Robot;
-import org.usfirst.frc.team4145.RobotMap;
-import org.usfirst.frc.team4145.shared.AutoTrajectory.AdaptivePurePursuitController;
-import org.usfirst.frc.team4145.shared.AutoTrajectory.Kinematics;
-import org.usfirst.frc.team4145.shared.AutoTrajectory.Path;
-import org.usfirst.frc.team4145.shared.AutoTrajectory.RigidTransform2d;
+import org.usfirst.frc.team4145.*;
+import org.usfirst.frc.team4145.shared.AutoTrajectory.*;
 import org.usfirst.frc.team4145.shared.MixedDrive;
-
-import static org.usfirst.frc.team4145.subsystems.RobotDriveV4.RobotDriveV4.DriveControlState.OPEN_LOOP;
-import static org.usfirst.frc.team4145.subsystems.RobotDriveV4.RobotDriveV4.DriveControlState.PROFILING_TEST;
-
 
 public class RobotDriveV4 extends Subsystem implements PIDOutput, PIDSource {
 
-    public enum DriveControlState {
+    enum DriveControlState {
         OPEN_LOOP("Open Loop"), PATH_FOLLOWING_CONTROL("Path following"), PROFILING_TEST("Profiling test");
         private String s;
 
@@ -43,7 +32,7 @@ public class RobotDriveV4 extends Subsystem implements PIDOutput, PIDSource {
     private boolean enLock = false, isReversed = false, isLowGear = false;
     private double[] operatorInput = {0, 0, 0}; //last input set from joystick update
     private PIDSourceType type = PIDSourceType.kDisplacement;
-    private DriveControlState driveControlState = OPEN_LOOP;
+    private DriveControlState driveControlState = DriveControlState.OPEN_LOOP;
     private AdaptivePurePursuitController pathFollowingController;
 
     public RobotDriveV4() {
@@ -59,7 +48,7 @@ public class RobotDriveV4 extends Subsystem implements PIDOutput, PIDSource {
     }
 
     private Runnable periodic = () -> {
-        if(Constants.ENABLE_MP_TEST_MODE) driveControlState = PROFILING_TEST;
+        if(Constants.ENABLE_MP_TEST_MODE) driveControlState = DriveControlState.PROFILING_TEST;
         if(DriverStation.getInstance().isEnabled()){
             switch (driveControlState){
                 case PATH_FOLLOWING_CONTROL:
