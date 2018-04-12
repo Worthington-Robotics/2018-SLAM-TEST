@@ -12,7 +12,7 @@ public class testAuto extends QueueGroup {
     public testAuto(int variant){
         List<Path.Waypoint> first_path = new ArrayList<>();
         first_path.add(new Path.Waypoint(new Translation2d(0, 0), 60.0));
-        first_path.add(new Path.Waypoint(new Translation2d(60, 0),  60.0));
+        first_path.add(new Path.Waypoint(new Translation2d(120, 0),  60.0));
         addDrive(first_path, false);
     }
 

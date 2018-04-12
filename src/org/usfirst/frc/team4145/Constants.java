@@ -11,7 +11,7 @@ public class Constants {
     private static boolean isCompBot = false; //change this to use competition or non-competition constants
     public static String ROBOT_NAME = "Cube Crusher";
 
-    public static boolean ENABLE_MP_TEST_MODE = true; //enables motion profiling test across all modes
+    public static boolean ENABLE_MP_TEST_MODE = false; //enables motion profiling test across all modes
 
     public static int PID_IDX = 0;
 
@@ -145,15 +145,15 @@ public class Constants {
      * || Spilt Constants ||
      * ---------------------
      */
-    public static double MP_TESTSPEED = 400; //800 rpm
+    public static double MP_TESTSPEED = 152; //100 rpm ~ 31 in/s ~ 3ft/s
 
-    private static double PRACTICE_RIGHT_KF = 0.0450; //nominal: 0.0450
-    private static double PRACTICE_RIGHT_KP = 0.0500;
+    private static double PRACTICE_RIGHT_KF = 0.3200; //nominal: 0.3800
+    private static double PRACTICE_RIGHT_KP = 0.4000; //nominal: 0.1500
     private static double PRACTICE_RIGHT_KI = 0.0000;
     private static double PRACTICE_RIGHT_KD = 0.0000;
 
-    private static double PRACTICE_LEFT_KF = 0.0450; //nominal: 0.0450
-    private static double PRACTICE_LEFT_KP = 0.0500;
+    private static double PRACTICE_LEFT_KF = 0.3200; //nominal: 0.3800
+    private static double PRACTICE_LEFT_KP = 0.4000; //nominal: 0.1500
     private static double PRACTICE_LEFT_KI = 0.0000;
     private static double PRACTICE_LEFT_KD = 0.0000;
 

@@ -180,9 +180,10 @@ public class RobotDriveV4 extends Subsystem implements PIDOutput, PIDSource {
         SmartDashboard.putNumber("Left Wheel Encoder", getLeftEncoder());
         SmartDashboard.putNumber("Right Wheel Distance", getRightEncoder() * ((Constants.WHEEL_DIAMETER * Math.PI) / Constants.COUNTS_PER_REV));
         SmartDashboard.putNumber("Left Wheel Distance", getLeftEncoder() * ((Constants.WHEEL_DIAMETER * Math.PI) / Constants.COUNTS_PER_REV));
-        SmartDashboard.putNumber("Right Wheel Velocity", (getRightVelocity() * 512) / 75.0);
-        SmartDashboard.putNumber("Left Wheel Velocity", (getLeftVelocity() * 512) / 75.0);
+        SmartDashboard.putNumber("Right Wheel Velocity", uPer100MsToRPM(getRightVelocity()));
+        SmartDashboard.putNumber("Left Wheel Velocity", uPer100MsToRPM(getLeftVelocity()));
         SmartDashboard.putString("Drive Control Mode", driveControlState.toString());
+        SmartDashboard.putBoolean("Path Finished", isFinishedPath());
     }
 
     private static double inchesToRotations(double inches) {
@@ -191,6 +192,14 @@ public class RobotDriveV4 extends Subsystem implements PIDOutput, PIDSource {
 
     private static double inchesPerSecondToRpm(double inches_per_second) {
         return inchesToRotations(inches_per_second) * 60;
+    }
+
+    private static double uPer100MsToRPM(double uPer100Ms){
+        return (uPer100Ms* 75) / 512.0;
+    }
+
+    private static double RPMToUnitsPer100Ms(double RPM){
+        return (RPM * 512) / 75.0;
     }
 
     private void updatePathFollower() {
@@ -235,7 +244,7 @@ public class RobotDriveV4 extends Subsystem implements PIDOutput, PIDSource {
      */
     private void driveTank(double leftSpeed, double rightSpeed) {
         SmartDashboard.putNumberArray("Tank RPMS", new double[]{leftSpeed, rightSpeed});
-        m_MixedDriveInstance.tankDrive((leftSpeed * 512)/75 , (rightSpeed * 512)/75);
+        m_MixedDriveInstance.tankDrive(RPMToUnitsPer100Ms(leftSpeed) , RPMToUnitsPer100Ms(rightSpeed));
     }
 
     private void setTarget(double target) {

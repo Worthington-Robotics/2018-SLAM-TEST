@@ -5,6 +5,7 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class MixedDrive extends MecanumDrive{
 
@@ -68,6 +69,7 @@ public class MixedDrive extends MecanumDrive{
             case FRONT_LEFT:
                 kFrontLeft.set(ControlMode.Velocity, 0);
                 kFrontLeft.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
+                kFrontLeft.setSensorPhase(true);
                 kFrontLeft.selectProfileSlot(0, PID_IDX);
                 kFrontLeft.config_kF(0, kF, 0);
                 kFrontLeft.config_kP(0, kP, 0);
@@ -78,6 +80,7 @@ public class MixedDrive extends MecanumDrive{
             case FRONT_RIGHT:
                 kFrontRight.set(ControlMode.Velocity, 0);
                 kFrontRight.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
+                kFrontRight.setSensorPhase(true);
                 kFrontRight.selectProfileSlot(0, PID_IDX);
                 kFrontRight.config_kF(0, kF, 0);
                 kFrontRight.config_kP(0, kP, 0);
@@ -88,6 +91,7 @@ public class MixedDrive extends MecanumDrive{
             case REAR_LEFT:
                 kRearLeft.set(ControlMode.Velocity, 0);
                 kRearLeft.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
+                kRearLeft.setSensorPhase(true);
                 kRearLeft.selectProfileSlot(0, PID_IDX);
                 kRearLeft.config_kF(0, kF, 0);
                 kRearLeft.config_kP(0, kP, 0);
@@ -98,6 +102,7 @@ public class MixedDrive extends MecanumDrive{
             case REAR_RIGHT:
                 kRearRight.set(ControlMode.Velocity, 0);
                 kRearRight.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
+                kRearRight.setSensorPhase(true);
                 kRearRight.selectProfileSlot(0, PID_IDX);
                 kRearRight.config_kF(0, kF, 0);
                 kRearRight.config_kP(0, kP, 0);
@@ -138,6 +143,7 @@ public class MixedDrive extends MecanumDrive{
      * @param rightSpeed ticks per 100ms
      */
     public void tankDrive(double leftSpeed, double rightSpeed) {
+        SmartDashboard.putNumberArray("Internal tank values",new double[] {leftSpeed, rightSpeed});
         kFrontLeft.set(ControlMode.Velocity, leftSpeed);
         kFrontRight.set(ControlMode.Velocity, -rightSpeed);
         kRearLeft.set(ControlMode.Follower, kFrontLeft.getDeviceID());

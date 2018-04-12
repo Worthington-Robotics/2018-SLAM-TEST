@@ -40,7 +40,7 @@ public class LoggingSystem {
             initSuccess = true;
         } catch (Exception e) {
             DriverStation.reportError("Failed to initialize log on file!", false);
-            e.printStackTrace();
+            //e.printStackTrace();
         }
     }
 
@@ -74,12 +74,11 @@ public class LoggingSystem {
         }
     }
 
-    public static String WriteBuildInfoToDashboard() {
+    public static void WriteBuildInfoToDashboard() {
         String COMP_MSG = "THIS IS THE COMPETITION SOFTWARE CONFIG! CHECK IF ROBOT MATCHES!\n";
 
         String PRAC_MSG = "THIS IS THE PRACTICE SOFTWARE CONFIG! CHECK IF ROBOT MATCHES!\n";
-        String buildMsg = Constants.isCompBot()? COMP_MSG: PRAC_MSG ;
-        DriverStation.reportWarning(buildMsg, false);
+        DriverStation.reportWarning(Constants.isCompBot()? COMP_MSG: PRAC_MSG, false);
         try {
             //get the path of the currently executing jar file
             String currentJarFilePath = Robot.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
@@ -95,8 +94,8 @@ public class LoggingSystem {
             String newDateString = outputFormatter.format(utcFileDate);
 
             // write the build date & time to the operator's console log window
-            buildMsg = "== Robot Name == " + Constants.ROBOT_NAME + "| Build Date and Time: " + newDateString + "|";
-            DriverStation.reportWarning(buildMsg, false);
+            DriverStation.reportWarning("== Robot Name == " + Constants.ROBOT_NAME + "| Build Date and Time: " + newDateString + "|", false);
+            if(Constants.ENABLE_MP_TEST_MODE) DriverStation.reportWarning("MP TEST MODE IS ENABLED!", false);
         } catch (URISyntaxException e) {
             DriverStation.reportWarning("Error determining filename of current JAR file", true);
             //e.printStackTrace();
@@ -105,7 +104,6 @@ public class LoggingSystem {
             //e.printStackTrace();
         }
 
-        return buildMsg;
     }
 
     private File getMount() {
