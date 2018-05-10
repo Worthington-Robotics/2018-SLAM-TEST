@@ -4,9 +4,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Notifier;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.usfirst.frc.team4145.Constants;
-import org.usfirst.frc.team4145.Robot;
-
+import org.usfirst.frc.team4145.*;
 
 import java.io.*;
 import java.net.URISyntaxException;
@@ -68,7 +66,7 @@ public class LoggingSystem {
                 toWrite += "" + SmartDashboard.getNumber(key, 0.0) + "\t";
             }
             toWrite += "\r\n";
-            System.out.println(toWrite);
+            //System.out.println(toWrite);
             printWriter.write(toWrite);
             printWriter.flush();
         }
@@ -110,11 +108,11 @@ public class LoggingSystem {
         File mountPoint;
         // find the mount point
         File testPoint = new File(Constants.DRIVE_PATH_1 + "/logging");
-        if (testPoint.isDirectory()) { //drive exists on sda
+        if (testPoint.isDirectory()) { //robotDriveV4 exists on sda
             mountPoint = testPoint;
         } else {
             testPoint = new File(Constants.DRIVE_PATH_2 + "/logging");
-            if (testPoint.isDirectory()) {//drive exists on sdb
+            if (testPoint.isDirectory()) {//robotDriveV4 exists on sdb
                 mountPoint = testPoint;
             } else {
                 mountPoint = null;

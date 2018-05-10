@@ -5,7 +5,6 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class MixedDrive extends MecanumDrive{
 
@@ -27,7 +26,7 @@ public class MixedDrive extends MecanumDrive{
      * @param rearRight talon srx motor controller for rear right
      * @param pidIDSlot pid id# use with multiple PIDS
      */
-    public MixedDrive (WPI_TalonSRX frontLeft, WPI_TalonSRX rearLeft, WPI_TalonSRX frontRight, WPI_TalonSRX rearRight, int pidIDSlot){
+    public MixedDrive(WPI_TalonSRX frontLeft, WPI_TalonSRX rearLeft, WPI_TalonSRX frontRight, WPI_TalonSRX rearRight, int pidIDSlot){
         super(frontLeft, rearLeft, frontRight, rearRight);
         PID_IDX = pidIDSlot;
         kFrontLeft = frontLeft;
@@ -44,7 +43,7 @@ public class MixedDrive extends MecanumDrive{
      * @param frontRight talon srx motor controller for front right
      * @param rearRight talon srx motor controller for rear right
      */
-    public MixedDrive (WPI_TalonSRX frontLeft, WPI_TalonSRX rearLeft, WPI_TalonSRX frontRight, WPI_TalonSRX rearRight){
+    public MixedDrive(WPI_TalonSRX frontLeft, WPI_TalonSRX rearLeft, WPI_TalonSRX frontRight, WPI_TalonSRX rearRight){
        this(frontLeft,rearLeft,frontRight,rearRight,0);
     }
 
@@ -57,7 +56,7 @@ public class MixedDrive extends MecanumDrive{
     }
 
     /**
-     * method for configuring drive talons in master mode
+     * method for configuring robotDriveV4 talons in master mode
      * @param selector talon to configure for velocity PID control
      * @param kP proportional gain
      * @param kI integral gain
@@ -143,7 +142,7 @@ public class MixedDrive extends MecanumDrive{
      * @param rightSpeed ticks per 100ms
      */
     public void tankDrive(double leftSpeed, double rightSpeed) {
-        SmartDashboard.putNumberArray("Internal tank values",new double[] {leftSpeed, rightSpeed});
+        //SmartDashboard.putNumberArray("Internal tank values",new double[] {leftSpeed, rightSpeed});
         kFrontLeft.set(ControlMode.Velocity, leftSpeed);
         kFrontRight.set(ControlMode.Velocity, -rightSpeed);
         kRearLeft.set(ControlMode.Follower, kFrontLeft.getDeviceID());

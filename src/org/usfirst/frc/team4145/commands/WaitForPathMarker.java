@@ -1,0 +1,25 @@
+package org.usfirst.frc.team4145.commands;
+
+import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.usfirst.frc.team4145.RobotMap;
+
+import java.util.Set;
+
+public class WaitForPathMarker extends Command {
+
+    private String marker;
+
+    public WaitForPathMarker(String marker){
+        this.marker = marker;
+    }
+
+    public boolean isFinished(){
+        Set<String> markers = RobotMap.robotDriveV4.getPathMarkersCrossed();
+        if(((markers != null) && markers.contains(marker)))
+            System.out.println("path to " + marker + " is finished");
+        SmartDashboard.putString("Marker completion","path to " + marker + " is " + ((markers != null && markers.contains(marker))? "finished": "not finished"));
+        return ((markers != null) && markers.contains(marker));
+    }
+
+}

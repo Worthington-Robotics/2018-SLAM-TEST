@@ -8,27 +8,41 @@ public class Constants {
      * ----------------------
      */
 
-    private static boolean isCompBot = false; //change this to use competition or non-competition constants
+    private static boolean isCompBot = true; //change this to use competition or non-competition constants
     public static String ROBOT_NAME = "Cube Crusher";
 
+    //update times / rates
+    public static double DRIVETRAIN_UPDATE_RATE = 0.010;
+    public static double LOGGING_UPDATE_RATE = 0.050;
+    public static double STATE_MACHINE_UPDATE_RATE = 0.010;
+
+    //MP Test mode values
     public static boolean ENABLE_MP_TEST_MODE = false; //enables motion profiling test across all modes
+    public static double MP_TEST_SPEED = 152;
 
-    public static int PID_IDX = 0;
-
-    public static double DRIVETRAIN_UPDATE_RATE = 0.01;
-    public static double LOGGING_UPDATE_RATE = 0.020;
-    public static int OBSERVATION_BUFFER_SIZE = 10;
+    //Pure pursuit related values
+    public static int OBSERVATION_BUFFER_SIZE = 10; //size of pose observation buffer
     public static double TRACK_WIDTH_INCHES = 23.5;
     public static double TRACK_SCRUB_FACTOR = 0.5;
     public static double WHEEL_DIAMETER = 6.0;
-    public static double COUNTS_PER_REV = 4096;
-    public static double PATH_FOLLOWING_LOOKAHEAD = 24.0; // inches
-    public static double PATH_FOLLOWING_MAX_VELOCITY = 60.0; // inches/sec
-    public static double PATH_FOLLOWING_MAX_ACCELERATION = 36.0; // inches/sec^2
+    public static double COUNTS_PER_REV = 4096; //encoder counts per revolution
+    public static double PATH_FOLLOWING_LOOKAHEAD = 24.0; // lookahead in inches
+    public static double PATH_FOLLOWING_MAX_VELOCITY = 200.0; //overall max velocity - includes turns - in inches/sec
+    public static double PATH_FOLLOWING_MAX_ACCELERATION = 42.0; // overall max acceleration - includes turns - in inches/sec^2
+    public static double BRAKE_RPM = 0.0; //power applied to brake robot nominal: 20
 
-    public static String DRIVE_PATH_1 = "/media/sda";
-    public static String DRIVE_PATH_2 = "/media/sdb";
+    //logging directories
+    public static String DRIVE_PATH_1 = "/media/sda"; // top usb port
+    public static String DRIVE_PATH_2 = "/media/sdb"; // bottom usb port
 
+    //cube manipulator power settings
+    public static double CUBEMANIP_SHOOT = 1.0000;
+    public static double CUBEMANIP_DROP = 0.6500;
+    public static double CUBEMANIP_FAST_DROP = 0.9000;
+    public static double CUBEMANIP_PICKUP = -0.7500;
+
+    //auto variables
+    public static boolean SHIFT = false;
 
     /*
      * ----------------------------
@@ -36,29 +50,37 @@ public class Constants {
      * ----------------------------
      */
 
+    //DriveTo PID values
     private static double DRIVETO_KP = 0.0040; //nominal 0.0040
     private static double DRIVETO_KI = 0.0000; //nominal 0.0000
     private static double DRIVETO_KD = 0.0250; //nominal 0.0250
     private static double DRIVETO_LIM = 0.6000; //nominal 0.6
 
+    //Drivetrain constants for teleop
     private static double TELEOP_DEADBAND = 0.1500; //nominal deadband 0.1500
-    private static double TELEOP_Y_PERCENTAGE = 0.7500; //nominal decrease to y ouput percentage 0.7500
+    private static double TELEOP_Y_PERCENTAGE = 0.8500; //nominal decrease to y ouput percentage 0.7500
     private static double TELEOP_Y_CUT_PERCENTAGE = 0.5000; //nominal fine adjust y cut 0.5000
     private static double TELEOP_X_PERCENTAGE = 1.000; //nominal decrease to x output percentage 1.0000
     private static double TELEOP_X_CUT_PERCENTAGE = 1.0000; //nominal fine adjust x cut percentage
     private static double TELEOP_Z_PERCENTAGE = 0.5000; //nominal decrease to z output percentage
 
+    //Gyrolock constants
     private static double GYROLOCK_KP = 0.0330; //nominal 0.0330
     private static double GYROLOCK_KI = 0.0000; //nominal 0.0000
     private static double GYROLOCK_KD = 0.0550; //nominal 0.0550
     private static double GYROLOCK_TOL = 1.0000; //nominal 1.0000
     private static double GYROLOCK_LIM = 0.6500; //nominal 0.6500
 
+    //Lift PID constants
     private static double LIFTTO_KP = 0.0200;
     private static double LIFTTO_KI = 0.0000;
     private static double LIFTTO_KD = 0.0000;
     private static double LIFTTO_TOL = 1.0000;
     private static double LIFTTO_LIM = 1.0000;
+
+    //Lift constants
+    private static double STAGE_2_BUTTON_SPEED = 1.0;
+    private static double STAGE_2_MULTIPLIER = 2.0;
 
     public static double getDrivetoKp() {
         return DRIVETO_KP;
@@ -140,34 +162,41 @@ public class Constants {
         return LIFTTO_LIM;
     }
 
+    public static double getStage2ButtonSpeed(){
+        return STAGE_2_BUTTON_SPEED;
+    }
+
+    public static double getStage2Multiplier(){
+        return STAGE_2_MULTIPLIER;
+    }
+
     /*
      * ---------------------
      * || Spilt Constants ||
      * ---------------------
      */
-    public static double MP_TESTSPEED = 152; //100 rpm ~ 31 in/s ~ 3ft/s
 
-    private static double PRACTICE_RIGHT_KF = 0.3200; //nominal: 0.3200
-    private static double PRACTICE_RIGHT_KP = 1.0000; //nominal: 0.1500
+    private static double PRACTICE_RIGHT_KF = 0.3100; //nominal: 0.3200
+    private static double PRACTICE_RIGHT_KP = 0.6000; //nominal: 0.8000
     private static double PRACTICE_RIGHT_KI = 0.0000;
-    private static double PRACTICE_RIGHT_KD = 6.0000;
+    private static double PRACTICE_RIGHT_KD = 3.0000; //3.0000
 
     private static double PRACTICE_LEFT_KF = 0.3200; //nominal: 0.3200
-    private static double PRACTICE_LEFT_KP = 1.0000; //nominal: 0.1500
+    private static double PRACTICE_LEFT_KP = 0.6000; //nominal: 0.8000
     private static double PRACTICE_LEFT_KI = 0.0000;
-    private static double PRACTICE_LEFT_KD = 6.0000;
+    private static double PRACTICE_LEFT_KD = 3.0000; //3.0000
 
 
 
-    private static double COMPETITION_RIGHT_KF = 0.3900;
-    private static double COMPETITION_RIGHT_KP = 0.4000;
+    private static double COMPETITION_RIGHT_KF = 0.2700;
+    private static double COMPETITION_RIGHT_KP = 0.7000;
     private static double COMPETITION_RIGHT_KI = 0.0000;
-    private static double COMPETITION_RIGHT_KD = 0.0000;
+    private static double COMPETITION_RIGHT_KD = 3.0000;
 
-    private static double COMPETITION_LEFT_KF = 0.3900;
-    private static double COMPETITION_LEFT_KP = 0.4000; //test bench motor
+    private static double COMPETITION_LEFT_KF = 0.2700;
+    private static double COMPETITION_LEFT_KP = 0.7000; //test bench motor
     private static double COMPETITION_LEFT_KI = 0.0000;
-    private static double COMPETITION_LEFT_KD = 0.0000;
+    private static double COMPETITION_LEFT_KD = 3.0000;
 
 
 
@@ -206,6 +235,7 @@ public class Constants {
     public static double getLeftKD(){
         return isCompBot? COMPETITION_LEFT_KD : PRACTICE_LEFT_KD;
     }
+
 
 
 }

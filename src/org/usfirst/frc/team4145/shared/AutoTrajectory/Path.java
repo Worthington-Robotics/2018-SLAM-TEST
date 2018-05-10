@@ -1,11 +1,6 @@
 package org.usfirst.frc.team4145.shared.AutoTrajectory;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 /**
  * A Path is a recording of the path that the robot takes. Path objects consist

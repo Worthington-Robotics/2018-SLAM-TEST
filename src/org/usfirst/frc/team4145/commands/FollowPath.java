@@ -7,10 +7,9 @@ import org.usfirst.frc.team4145.shared.AutoTrajectory.Path;
 public class FollowPath extends Command {
 
     private Path mPath;
-    private boolean mReversed;
-    private boolean mHasStarted;
+    private boolean mReversed, mHasStarted;
 
-    public FollowPath(Path path, boolean reversed) {
+    public FollowPath(Path path, boolean reversed){
         mPath = path;
         mReversed = reversed;
         mHasStarted = false;
