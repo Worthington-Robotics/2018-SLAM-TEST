@@ -64,6 +64,8 @@ public class PoseEstimator {
         SmartDashboard.putNumber("Robot Pose X", odometry.getTranslation().getX());
         SmartDashboard.putNumber("Robot Pose Y", odometry.getTranslation().getY());
         SmartDashboard.putNumber("Robot Pose Theta", odometry.getRotation().getDegrees());
+        SmartDashboard.putNumber("AHRS X", RobotMap.ahrs.getDisplacementX() * Constants.METERS_TO_INCHES);
+        SmartDashboard.putNumber("AHRS Y", RobotMap.ahrs.getDisplacementY() * Constants.METERS_TO_INCHES);
     }
 
 }

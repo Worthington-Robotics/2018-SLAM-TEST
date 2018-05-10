@@ -12,5 +12,17 @@
 			<attribute name="javadoc_location" value="file:/C:/Users/coalm/wpilib/java/current/lib"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="/Users/pwhite/wpilib/java/current/lib/cscore-sources.jar"/>
+	<classpathentry kind="lib" path="/Users/pwhite/wpilib/java/current/lib/cscore.jar"/>
+	<classpathentry kind="lib" path="/Users/pwhite/wpilib/java/current/lib/ntcore-sources.jar"/>
+	<classpathentry kind="lib" path="/Users/pwhite/wpilib/java/current/lib/ntcore.jar"/>
+	<classpathentry kind="lib" path="/Users/pwhite/wpilib/java/current/lib/opencv-sources.jar"/>
+	<classpathentry kind="lib" path="/Users/pwhite/wpilib/java/current/lib/opencv.jar"/>
+	<classpathentry kind="lib" path="/Users/pwhite/wpilib/java/current/lib/WPILib-sources.jar"/>
+	<classpathentry kind="lib" path="/Users/pwhite/wpilib/java/current/lib/WPILib.jar"/>
+	<classpathentry kind="lib" path="/Users/pwhite/wpilib/java/current/lib/wpiutil-sources.jar"/>
+	<classpathentry kind="lib" path="/Users/pwhite/wpilib/java/current/lib/wpiutil.jar"/>
+	<classpathentry kind="lib" path="/Users/pwhite/Downloads/navx_frc.jar"/>
+	<classpathentry kind="lib" path="/Users/pwhite/Downloads/CTRE_Phoenix.jar"/>
 	<classpathentry kind="output" path="out/production/velocityTest"/>
 </classpath>

@@ -43,6 +43,10 @@ public class Constants {
 
     //auto variables
     public static boolean SHIFT = false;
+    
+    //unit changes
+    public static double METERS_TO_INCHES = 39.3701;
+
 
     /*
      * ----------------------------
