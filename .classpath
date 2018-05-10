@@ -2,27 +2,15 @@
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="var" path="USER_HOME/wpilib/user/java/lib/navx_frc.jar" sourcepath="/USER_HOME/wpilib/user/java/lib/navx_frc.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="file:/C:/Users/coalm/wpilib/user/java/lib"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="var" path="USER_HOME/wpilib/java/current/lib/cscore.jar" sourcepath="/USER_HOME/wpilib/java/current/lib/cscore.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="file:/C:/Users/coalm/wpilib/java/current/lib"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="/Users/pwhite/wpilib/java/current/lib/cscore-sources.jar"/>
-	<classpathentry kind="lib" path="/Users/pwhite/wpilib/java/current/lib/cscore.jar"/>
-	<classpathentry kind="lib" path="/Users/pwhite/wpilib/java/current/lib/ntcore-sources.jar"/>
-	<classpathentry kind="lib" path="/Users/pwhite/wpilib/java/current/lib/ntcore.jar"/>
-	<classpathentry kind="lib" path="/Users/pwhite/wpilib/java/current/lib/opencv-sources.jar"/>
-	<classpathentry kind="lib" path="/Users/pwhite/wpilib/java/current/lib/opencv.jar"/>
-	<classpathentry kind="lib" path="/Users/pwhite/wpilib/java/current/lib/WPILib-sources.jar"/>
-	<classpathentry kind="lib" path="/Users/pwhite/wpilib/java/current/lib/WPILib.jar"/>
-	<classpathentry kind="lib" path="/Users/pwhite/wpilib/java/current/lib/wpiutil-sources.jar"/>
-	<classpathentry kind="lib" path="/Users/pwhite/wpilib/java/current/lib/wpiutil.jar"/>
-	<classpathentry kind="lib" path="/Users/pwhite/Downloads/navx_frc.jar"/>
-	<classpathentry kind="lib" path="/Users/pwhite/Downloads/CTRE_Phoenix.jar"/>
+	<classpathentry kind="var" path="networktables"/>
+	<classpathentry kind="var" path="networktables.sources"/>
+	<classpathentry kind="var" path="opencv"/>
+	<classpathentry kind="var" path="opencv.sources"/>
+	<classpathentry kind="var" path="USERLIBS_DIR"/>
+	<classpathentry kind="var" path="wpilib"/>
+	<classpathentry kind="var" path="wpilib.sources"/>
+	<classpathentry kind="var" path="wpiutil"/>
+	<classpathentry kind="var" path="wpiutil.sources"/>
+	<classpathentry kind="var" path="cscore"/>
 	<classpathentry kind="output" path="out/production/velocityTest"/>
 </classpath>
