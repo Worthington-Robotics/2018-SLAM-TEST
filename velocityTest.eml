@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component inherit-compiler-output="true" inheritJdk="true">
+	<output-test url="file://$MODULE_DIR$/out/test/velocityTest"/>
+	<exclude-output/>
+	<contentEntry url="file://$MODULE_DIR$"/>
+	<lib name="WPILib User Lib Directory" scope="COMPILE">
+		<srcroot url="file://$USER_HOME$/wpilib/user/java/lib"/>
+		<srcroot url="file://$USER_HOME$/wpilib/user/java/lib"/>
+		<javadocroot_attr url="file://$USER_HOME$/wpilib/user/java/lib"/>
+	</lib>
+	<lib name="WPILib Libraries" scope="COMPILE">
+		<srcroot url="file://$USER_HOME$/wpilib/java/current/lib"/>
+		<srcroot url="file://$USER_HOME$/wpilib/java/current/lib"/>
+		<javadocroot_attr url="file://$USER_HOME$/wpilib/java/current/lib"/>
+	</lib>
+</component>
